@@ -5,12 +5,12 @@
                       http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-	<groupId>cnam</groupId>
-	<artifactId>tittineShare</artifactId>
+	<groupId>navidrone</groupId>
+	<artifactId>ServeurCommunication</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	
-	<name>tittineShare</name>
+	<name>ServeurCommunication</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
