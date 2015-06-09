@@ -1,5 +1,7 @@
 package serveurcomm.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -8,6 +10,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import serveurcomm.modele.bean.CoordGps;
+import serveurcomm.modele.bean.Mission;
+import serveurcomm.modele.dao.CoordGpsDAO;
+import serveurcomm.modele.dao.MissionDAO;
 import serveurcomm.modele.dao.UtilisateurDAO;
 
 @Controller
@@ -16,14 +22,54 @@ public class ControllerDefault {
 	@Autowired
     private UtilisateurDAO utilisateurDao;
 	
+	@Autowired
+    private CoordGpsDAO coordGpsDao;
+
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView helloWorld(){
-		
+ 
 		ModelAndView model = new ModelAndView("accueil");
 		model.addObject("titrePage", "accueil");
 		model.addObject("msg", "hello world");
-		System.out.println("COUCOUCOUCOU");
+		model.addObject("nom", utilisateurDao.get(1).getNom());
+		model.addObject("prenom", utilisateurDao.get(1).getPrenom());
+		model.addObject("object", utilisateurDao.get(1));
+		model.addObject("autre", "Message spécial");
 		return model;
+	}
+	
+	@RequestMapping(value = "/map", method = RequestMethod.GET)
+	public ModelAndView map(){
+ 
+		ModelAndView model = new ModelAndView("map");
+		model.addObject("titrePage", "Carte du Canal du Midi");
+		model.addObject("lat", Double.toString(coordGpsDao.get(1).getLattitude()));
+		model.addObject("long", Double.toString(coordGpsDao.get(1).getLongitude()));
+		List<CoordGps> liste = coordGpsDao.list();
+		model.addObject("scriptPoints", this.GetPoints(liste));
+		model.addObject("scriptPolyline", this.GetPolyline(liste.size()));
+		model.addObject("lastPosIndex", Integer.toString(liste.size()));
+		return model;
+	}
+
+	private String GetPoints(List<CoordGps> liste) {
+		String script = "";
+		int index = 1;
+		for (CoordGps coordGps : liste) {
+			script += "var pos" + index + "=new google.maps.LatLng(" + coordGps.getLattitude() + ", " + coordGps.getLongitude() + ");\r\n";
+			index++;
+		}
+		return script;
+	}
+	
+	private String GetPolyline(int listSize) {
+		String script = "[";
+		for (int i = 1; i < listSize; i++) {
+			script += "pos" + i + ",";
+		}
+		script += "pos" + listSize + "]\r\n";
+		return script;
 	}
 	
 	@RequestMapping(value = "/creationMission", method = RequestMethod.GET)
@@ -41,8 +87,8 @@ public class ControllerDefault {
 		/**
 		 * Contrôle de la cohérence de la mission
 		 */
-		MissionDao missionDao = new MissionDao();
-		missionDao.save(mission);
+		MissionDAO missionDao = new MissionDAO();
+		missionDao.saveOrUpdate(mission);
 		
 		ModelAndView model = new ModelAndView("recapCreationMission");
 		model.addObject("mission", mission);

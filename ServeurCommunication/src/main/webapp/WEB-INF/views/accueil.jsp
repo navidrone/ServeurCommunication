@@ -19,9 +19,13 @@
 		<div class="row">
 			<form:form  id="identification" action="/identification">
 				<div align="center">	Bienvenue Sur Tittine Share !!! </div>
+				<br />
+				<div align="center">Exemple&nbsp;: ${autre} -  NOM&nbsp;${nom} - PR&Eacute;NOM&nbsp;: ${prenom}</div>
+				${object.nom}
 			</form:form>
 		</div>
 	</div>
+	<a href="/ServeurCommunication/map">Carte</a>
 </body>
 <!-- Imports JS -->
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>

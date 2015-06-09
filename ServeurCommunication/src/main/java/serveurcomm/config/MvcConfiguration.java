@@ -20,7 +20,11 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import serveurcomm.modele.bean.CoordGps;
+import serveurcomm.modele.bean.Mission;
 import serveurcomm.modele.bean.Utilisateur;
+import serveurcomm.modele.dao.CoordGpsDAO;
+import serveurcomm.modele.dao.MissionDAO;
 import serveurcomm.modele.dao.UtilisateurDAO;
 
 
@@ -70,6 +74,8 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 		LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
 	 
 		sessionBuilder.addAnnotatedClasses(Utilisateur.class);
+		sessionBuilder.addAnnotatedClasses(CoordGps.class);
+		sessionBuilder.addAnnotatedClasses(Mission.class);
 	 
 		return sessionBuilder.buildSessionFactory();
 	}	
@@ -87,6 +93,19 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 	@Bean(name = "utilisateurDao")
 	public UtilisateurDAO getUtilisateurDao(SessionFactory sessionFactory) {
 		return new UtilisateurDAO(sessionFactory);
+	}
+	
+	
+	@Autowired
+	@Bean(name = "coordGpsDao")
+	public CoordGpsDAO getCoordonneeGpsDAO(SessionFactory sessionFactory) {
+		return new CoordGpsDAO(sessionFactory);
+	}
+	
+	@Autowired
+	@Bean(name = "missionDao")
+	public MissionDAO getMissionDAO(SessionFactory sessionFactory) {
+		return new MissionDAO(sessionFactory);
 	}
 	
 }
