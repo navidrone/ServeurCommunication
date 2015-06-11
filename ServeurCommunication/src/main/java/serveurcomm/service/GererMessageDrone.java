@@ -64,5 +64,6 @@ public class GererMessageDrone implements Runnable{
 		String json = new String(Files.readAllBytes(Paths.get("message_drone.json"), "UTF-8")); 
 		final ObjectMapper mapper = new ObjectMapper();
 	    final TestSuite readValue = mapper.readValue(json, TestSuite.class);
+	    S
 	}
 }
