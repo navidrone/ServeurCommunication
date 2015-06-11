@@ -2,17 +2,23 @@ package serveurcomm.config;
 
 
 import java.util.Properties;
+import java.util.concurrent.Executor;
 
+import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.Lifecycle;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
+import org.springframework.scheduling.annotation.AsyncConfigurer;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -26,6 +32,7 @@ import serveurcomm.modele.bean.Utilisateur;
 import serveurcomm.modele.dao.CoordGpsDAO;
 import serveurcomm.modele.dao.MissionDAO;
 import serveurcomm.modele.dao.UtilisateurDAO;
+import serveurcomm.service.ServeurDrone;
 
 
 @Configuration
@@ -89,6 +96,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 		return transactionManager;
 	}
 	
+	
 	@Autowired
 	@Bean(name = "utilisateurDao")
 	public UtilisateurDAO getUtilisateurDao(SessionFactory sessionFactory) {
@@ -106,6 +114,14 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 	@Bean(name = "missionDao")
 	public MissionDAO getMissionDAO(SessionFactory sessionFactory) {
 		return new MissionDAO(sessionFactory);
+	}
+
+
+
+	@PostConstruct
+	public void demarrerServeurDrone() {
+		Thread thread = new Thread(new ServeurDrone(5050));
+		thread.start();
 	}
 	
 }
