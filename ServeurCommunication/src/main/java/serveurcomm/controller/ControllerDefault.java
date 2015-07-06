@@ -1,5 +1,7 @@
 package serveurcomm.controller;
 
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,8 @@ import serveurcomm.modele.bean.Mission;
 import serveurcomm.modele.dao.CoordGpsDAO;
 import serveurcomm.modele.dao.MissionDAO;
 import serveurcomm.modele.dao.UtilisateurDAO;
+import serveurcomm.modele.rmi.FabriqueMissionImp;
+import serveurcomm.modele.rmi.FabriqueMissionInt;
 
 @Controller
 public class ControllerDefault {
@@ -29,6 +33,17 @@ public class ControllerDefault {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView helloWorld(){
  
+		 try {
+	            Registry registry = LocateRegistry.getRegistry("1099");
+	            FabriqueMissionInt stub =  (FabriqueMissionInt) registry.lookup("FabriqueMission");
+	            Mission mission = stub.getMission(0);
+	            System.out.println("mission: " + mission);
+	        } catch (Exception e) {
+	            System.err.println("Client exception: " + e.toString());
+	            e.printStackTrace();
+	        }
+		 
+		
 		ModelAndView model = new ModelAndView("accueil");
 		model.addObject("titrePage", "accueil");
 		model.addObject("msg", "hello world");

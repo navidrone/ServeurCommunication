@@ -32,20 +32,9 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-	<servlet>
-		<description>
-		</description>
-		<display-name>AccueilController</display-name>
-		<servlet-name>AccueilController</servlet-name>
-		<servlet-class>cnam.tittineshare.controller.AccueilController</servlet-class>
-	</servlet>
 	<servlet-mapping>
 		<servlet-name>SpringDispatcher</servlet-name>
 		<url-pattern>/</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>AccueilController</servlet-name>
-		<url-pattern>/AccueilController</url-pattern>
 	</servlet-mapping>
 
 	<session-config>

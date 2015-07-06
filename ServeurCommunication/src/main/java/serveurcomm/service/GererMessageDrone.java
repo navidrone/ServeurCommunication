@@ -10,6 +10,8 @@ import java.net.Socket;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import org.codehaus.jackson.map.ObjectMapper;
+
 import ch.qos.logback.classic.Logger;
 
 public class GererMessageDrone implements Runnable{
@@ -59,11 +61,10 @@ public class GererMessageDrone implements Runnable{
 
 	}
 	
-	public void traiterMessageClient(){
-		FileInputStream fis = new FileInputStream(arg0);
-		String json = new String(Files.readAllBytes(Paths.get("message_drone.json"), "UTF-8")); 
-		final ObjectMapper mapper = new ObjectMapper();
-	    final TestSuite readValue = mapper.readValue(json, TestSuite.class);
-	    S
-	}
+//	public void traiterMessageClient(){
+//		FileInputStream fis = new FileInputStream(arg0);
+//		String json = new String(Files.readAllBytes(Paths.get("message_drone.json"), "UTF-8")); 
+//		final ObjectMapper mapper = new ObjectMapper();
+//	    final TestSuite readValue = mapper.readValue(json, TestSuite.class);
+//	}
 }
