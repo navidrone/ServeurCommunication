@@ -59,7 +59,7 @@ CREATE TABLE  `navidrone`.`RELEVE` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
     
 
-INSERT INTO `navidrone`.`WAYPOINT` (`MISSION_ID`, `COORD_GPS_ID`)
+INSERT INTO `navidrone`.`RELEVE` (`MISSION_ID`, `COORD_GPS_ID`)
  SELECT `MISSION_ID`, `COORD_GPS_ID`
  FROM  `navidrone`.`MISSION`, `navidrone`.`COORD_GPS`;
 
