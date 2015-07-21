@@ -1,18 +1,12 @@
 package serveurcomm.service;
 
 import java.io.BufferedOutputStream;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
-import org.codehaus.jackson.map.ObjectMapper;
-
-import ch.qos.logback.classic.Logger;
 
 public class GererMessageDrone implements Runnable{
 	private Socket client;

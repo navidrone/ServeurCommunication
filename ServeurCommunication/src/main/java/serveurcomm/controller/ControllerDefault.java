@@ -25,7 +25,7 @@ public class ControllerDefault {
 		 try {
 
 	            FabriqueMissionInt stub =  (FabriqueMissionInt) Naming.lookup("rmi://localhost:1099/FabriqueMission");
-	            Mission mission = (Mission) stub.getMission(1);
+	            Mission mission = (Mission) stub.getMission(0);
 	            System.out.println("mission: " + mission);            
 
 	    		
