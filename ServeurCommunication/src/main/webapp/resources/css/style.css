@@ -1,0 +1,120 @@
+body{
+	background-color: #01B0F0;
+}	
+
+.slide-bar{
+
+	min-width:10%;
+	height: 100%;
+	
+	float: left;
+	top: 10px;
+	left: 10px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+
+	/*border: solid 1px;*/
+
+
+
+}
+
+.containe{
+	
+  	top:10px;
+  	bottom:10px;
+  	right:10px;
+  	text-align: center;
+  	float: left;
+  	width: calc(90% - 20px);
+
+  	background-color: #01B0A6;
+
+  	/*border:solid 1px;*/
+}
+
+.title{
+	margin: 10px;
+	text-align: center;
+
+	/*border: solid 1px;*/
+}
+
+.title input{
+
+	margin: 10px;
+
+}
+
+.type-mission, .Rmoyenne{
+	margin: 10px;
+	text-align: left;
+	padding: 10px;
+
+}
+
+.type-mission span{
+
+	padding-bottom: 20px;
+}
+
+
+
+
+.maps{
+	
+	margin: 10px;
+	text-align: center;
+	height: 300px;
+	background-image: url("../images/canalDuMidi.PNG");
+
+	/*border: solid 1px;*/
+}
+.data{
+
+	margin: 10px;
+	text-align: center;
+	float:left; width : calc(100% - 20px);
+
+	/*border: solid 1px;*/
+}
+
+.depart{
+	margin: 10px;
+	float: left;
+
+	/*border:solid 1px;*/
+}
+
+.arrivee{
+	margin: 10px;
+	float: right;
+
+	/*border:solid 1px;*/
+
+}
+
+.porte{
+	margin: 10px;
+	float: right;
+	display: none;
+	/*border:solid 1px;*/
+
+}
+.data span {padding: 3px 0; float:left; width : 100%;}
+.data input {margin-bottom: 3px}
+
+.param{
+	margin: 10px;
+	
+
+	/*border:solid 1px;*/
+
+}
+.param span {padding: 8px 0; float:left; width : 100%;}
+
+.submit{
+	padding: 10px;
+
+	float: right;
+}

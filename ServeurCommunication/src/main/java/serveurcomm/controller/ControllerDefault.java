@@ -2,6 +2,8 @@ package serveurcomm.controller;
 
 import java.rmi.Naming;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,6 +39,31 @@ public class ControllerDefault {
 	            e.printStackTrace();
 	        }
 		 
+		return model;
+	}
+	
+	@RequestMapping(value = "/creer", method = RequestMethod.GET)
+	public ModelAndView creer(){
+
+		ModelAndView model = new ModelAndView("creerMission");
+				 
+		return model;
+	}
+	@RequestMapping(value = "/creer", method = RequestMethod.POST)
+	public ModelAndView creerm(HttpServletRequest request){
+		
+
+		String title = request.getParameter("title");
+		
+
+		ModelAndView model = new ModelAndView("creerMission");
+		
+		model.addObject("titrePage", "accueil");
+		model.addObject("msg", "hello world");
+		model.addObject("autre", "Message spécial");
+		model.addObject("title", title);
+		
+			
 		return model;
 	}
 	
