@@ -20,6 +20,9 @@ public class CoordGps implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
+	public CoordGps() {
+		super();
+	}
 	@Id
     @GeneratedValue
     @Column(name = "COORD_GPS_ID")

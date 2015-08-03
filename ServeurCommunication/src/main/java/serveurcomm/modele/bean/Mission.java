@@ -23,14 +23,12 @@ public class Mission extends UnicastRemoteObject implements Serializable,Mission
 	private static final long serialVersionUID = 1L;
 	private String titre;
 	private String type;
-	private float long_dep;
-	private float lat_dep;
-	private float long_ar;
-	private float lat_ar;
-	private float periode;
-	private int nb_drone;
-	private float densite;
-	private float portee;
+	private CoordGps coord_dep;
+	private CoordGps coord_ar;
+	private Double periode;
+	private int nbDrone;
+	private Double densite;
+	private Double portee;
 	
 	public Mission() throws RemoteException {
 		super();
@@ -65,67 +63,51 @@ public class Mission extends UnicastRemoteObject implements Serializable,Mission
 		this.type = type;
 	}
 
-	public float getLong_dep() {
-		return long_dep;
+	public CoordGps getCoord_dep() {
+		return coord_dep;
 	}
 
-	public void setLong_dep(float long_dep) {
-		this.long_dep = long_dep;
+	public void setCoord_dep(CoordGps coord_dep) {
+		this.coord_dep = coord_dep;
 	}
 
-	public float getLat_dep() {
-		return lat_dep;
+	public CoordGps getCoord_ar() {
+		return coord_ar;
 	}
 
-	public void setLat_dep(float lat_dep) {
-		this.lat_dep = lat_dep;
+	public void setCoord_ar(CoordGps coord_ar) {
+		this.coord_ar = coord_ar;
 	}
 
-	public float getLong_ar() {
-		return long_ar;
-	}
-
-	public void setLong_ar(float long_ar) {
-		this.long_ar = long_ar;
-	}
-
-	public float getLat_ar() {
-		return lat_ar;
-	}
-
-	public void setLat_ar(float lat_ar) {
-		this.lat_ar = lat_ar;
-	}
-
-	public float getPeriode() {
+	public Double getPeriode() {
 		return periode;
 	}
 
-	public void setPeriode(float periode) {
+	public void setPeriode(Double periode) {
 		this.periode = periode;
 	}
 
 	public int getNb_drone() {
-		return nb_drone;
+		return nbDrone;
 	}
 
 	public void setNb_drone(int nb_drone) {
-		this.nb_drone = nb_drone;
+		this.nbDrone = nb_drone;
 	}
 
-	public float getDensite() {
+	public Double getDensite() {
 		return densite;
 	}
 
-	public void setDensite(float densite) {
-		this.densite = densite;
+	public void setDensite(Double densite2) {
+		this.densite = densite2;
 	}
 
-	public float getPortee() {
+	public Double getPortee() {
 		return portee;
 	}
 
-	public void setPortee(float portee) {
+	public void setPortee(Double portee) {
 		this.portee = portee;
 	}
 

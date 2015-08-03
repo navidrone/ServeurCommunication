@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="utf8">
-<title>Navidrone</title>
+<title>Nouvelle mission</title>
 <link rel="stylesheet" href="resources/css/style.css">
 </head>
 <body>
@@ -18,8 +18,8 @@
 		<div class= "nav">
 		 <ul>
 		 	<li> <a href="index.html">Accueil</a> </li>
-		 	<li>${title}</li>
-		 	<li><a href="liste-missions.html"> Liste Missions</a>  </li>
+		 	<li><a href="liste-missions.html"> Créer mission</a></li>
+		 	<li><a href="liste-missions.html"> Liste missions</a>  </li>
 		 </ul>
 		</div>
 	
@@ -27,13 +27,13 @@
 	<div class ="containe">
 		<form action="" method="post">
 			<div class="title">
-				Titre:  <input type="text" name="title" value= ${title} >
+				Titre:  <input type="text" name="title" >
 			</div>
 
 			<div class="type-mission">
 				 <span>Type de Mission </span> <br>
-				<label> Bathymetrie : </label> <input type="radio" name="TMission" onclick="toggle_div('bathymetrie','arrivee');" value=${type}>
-				<label> Toc : </label><input type="radio" name="TMission" onclick="toggle_div('toc','arrivee');" value=${type}>
+				<label> Bathymetrie : </label> <input type="radio" name="type" onclick="toggle_div('bathymetrie','arrivee');" value='bathymetrie'>
+				<label> Toc : </label><input type="radio" name="type" onclick="toggle_div('toc','arrivee');" value='toc'>
 			</div>
 			
 			<div class= 'maps'>
@@ -43,21 +43,21 @@
 			<div class="data">
 				<div class="depart">
 					<span>Départ:</span>
-					Longitude: <input  type="text" name="dLon">
+					Longitude: <input  type="text" name="dlong" >
 					
-					Lattitude: <input type="text" name="dlat">
+					Lattitude: <input type="text" name="dlat" >
 				</div>
 				
 				<div id="arrivee" class="arrivee">
 					<span>Arrivée:</span>
-					Longitude: <input type="text" name="aLon">
+					Longitude: <input type="text" name="along">
 
-					Lattitude: <input type="text" name="aLat">
+					Lattitude: <input type="text" name="alat">
 				</div>
 
 				<div id="porte" class="porte">
 					<span>Portée:</span>
-					Portée: <input type="text" name="porte">
+					Portée: <input type="text" name="portee">
 				</div>
 				
 			</div>
@@ -68,12 +68,13 @@
 
 					Nombre de drones: <input type="text" name="nbDrone">
 
-					Densité du Maillage: <input type="text" name="dMallage">
+					Densité du Maillage: <input type="text" name="densite">
 
 				</div>
 
 				<div class="submit">
-					<input type="submit" name="save" value="save">
+					<button type="submit" class="btn btn-default">Enregistrer</button>
+					
 				</div>
 		</form>
 	

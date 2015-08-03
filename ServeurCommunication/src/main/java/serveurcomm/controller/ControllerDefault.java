@@ -1,6 +1,8 @@
 package serveurcomm.controller;
 
 import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,12 +12,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import rmi.FabriqueMissionInt;
+import serveurcomm.modele.bean.CoordGps;
 import serveurcomm.modele.bean.Mission;
 
 @Controller
 public class ControllerDefault {
 	
-
+	//private Mission mission; 
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView helloWorld(){
 
@@ -50,23 +54,66 @@ public class ControllerDefault {
 		return model;
 	}
 	@RequestMapping(value = "/creer", method = RequestMethod.POST)
-	public ModelAndView creerm(HttpServletRequest request){
+	public ModelAndView creerm(HttpServletRequest request) throws RemoteException, NotBoundException {
 		
-
+		Mission mission =  new Mission();
+		CoordGps coordGps_dep = new CoordGps();
+		CoordGps coordGps_ar = new CoordGps();
+		
 		String title = request.getParameter("title");
+		String type = request.getParameter("type");
+		Double dLong = Double.parseDouble(request.getParameter("dLong"));
+		Double dLat = Double.parseDouble(request.getParameter("dLat"));
+		Double aLong = Double.parseDouble(request.getParameter("aLong"));
+		Double aLat = Double.parseDouble(request.getParameter("aLat"));
+		Double periode = Double.parseDouble(request.getParameter("periode"));
+		int nbDrone = Integer.parseInt(request.getParameter("nbDrone"));
+		Double densite = Double.parseDouble(request.getParameter("densite"));
+		Double portee = Double.parseDouble(request.getParameter("portee"));
 		
+		
+		coordGps_dep.setLongitude(dLat);
+		coordGps_dep.setLongitude(dLong);
+		coordGps_ar.setLongitude(aLat);
+		coordGps_ar.setLongitude(aLong);
+		
+		mission.setTitre(title);
+		mission.setType(type);
+		mission.setCoord_dep(coordGps_dep);
+		mission.setCoord_ar(coordGps_ar);
+		mission.setDensite(densite);
+		mission.setPeriode(periode);
+		mission.setPortee(portee);
+		mission.setNb_drone(nbDrone);
+		
+		
+		try {
+			FabriqueMissionInt stub =  (FabriqueMissionInt) Naming.lookup("rmi://localhost:1099/FabriqueMission");
+			stub.saveMission(mission);
+			System.out.println("Mission" + mission + "enregistrée par RMI ");
+			// Demande Calcul du wayPoint en rmi
+			// RelevePoint WayPointMission(mission);
+            System.out.println("Mission enregistrée par RMI ");            
 
-		ModelAndView model = new ModelAndView("creerMission");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 		
-		model.addObject("titrePage", "accueil");
-		model.addObject("msg", "hello world");
-		model.addObject("autre", "Message spécial");
-		model.addObject("title", title);
+		// Affichage recap mission + waypoint
+		ModelAndView model = new ModelAndView("map");
 		
+		model.addObject("title", mission.getTitre());
 			
 		return model;
 	}
 	
+	@RequestMapping(value = "/trajet", method = RequestMethod.GET)
+	public ModelAndView trajet(){
+
+		ModelAndView model = new ModelAndView("creerTrajet");
+				 
+		return model;
+	}
 //	@RequestMapping(value = "/map", method = RequestMethod.GET)
 //	public ModelAndView map(){
 // 
