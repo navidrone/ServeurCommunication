@@ -3,6 +3,7 @@ package serveurcomm.modele.bean;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +11,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import rmi.DroneInt;
 import rmi.MissionInt;
+import rmi.ReleveInt;
 
 @Entity
 @Table(name = "MISSION")
@@ -109,6 +112,41 @@ public class Mission extends UnicastRemoteObject implements Serializable,Mission
 
 	public void setPortee(Double portee) {
 		this.portee = portee;
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return titre;
+	}
+
+	@Override
+	public void setName(String name) {
+		titre = name;		
+	}
+
+	@Override
+	public List<? extends ReleveInt> getReleve() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setReleve(List<? extends ReleveInt> releve) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<? extends DroneInt> getFlotte() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setFlotte(List<? extends DroneInt> flotte) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	
