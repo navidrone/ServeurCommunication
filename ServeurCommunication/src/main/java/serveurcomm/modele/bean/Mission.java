@@ -15,8 +15,6 @@ import rmi.DroneInt;
 import rmi.MissionInt;
 import rmi.ReleveInt;
 
-@Entity
-@Table(name = "MISSION")
 public class Mission extends UnicastRemoteObject implements Serializable,MissionInt{
 
 
@@ -37,9 +35,6 @@ public class Mission extends UnicastRemoteObject implements Serializable,Mission
 		super();
 	}
 
-	@Id
-    @GeneratedValue
-    @Column(name = "MISSION_ID")
 	private Integer id;
 
 	public Integer getId() {
