@@ -43,16 +43,16 @@
 			<div class="data">
 				<div class="depart">
 					<span>Départ:</span>
-					Longitude: <input  type="text" name="dlong" >
+					Longitude: <input  type="text" name="dLong" >
 					
-					Lattitude: <input type="text" name="dlat" >
+					Lattitude: <input type="text" name="dLat" >
 				</div>
 				
 				<div id="arrivee" class="arrivee">
 					<span>Arrivée:</span>
-					Longitude: <input type="text" name="along">
+					Longitude: <input type="text" name="aLong">
 
-					Lattitude: <input type="text" name="alat">
+					Lattitude: <input type="text" name="aLat">
 				</div>
 
 				<div id="porte" class="porte">
