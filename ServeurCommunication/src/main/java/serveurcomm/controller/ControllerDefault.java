@@ -80,6 +80,60 @@ public class ControllerDefault {
 	public ModelAndView creerm(HttpServletRequest request) throws RemoteException, NotBoundException {
 		
 		Mission mission =  new Mission();
+		
+		renseigneMissionDepuisFormulaire(mission,request);		
+		
+		try {
+			
+			getFabriqueMission().saveMission(mission);
+			
+			System.out.println("Mission" + mission + "enregistr�e par RMI ");
+			// Demande Calcul du wayPoint en rmi
+			// RelevePoint WayPointMission(mission);
+            System.out.println("Mission enregistr�e par RMI ");            
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		
+		// Affichage recap mission + waypoint
+		ModelAndView model = new ModelAndView("map");
+		
+		model.addObject("title", mission.getName());
+			
+		return model;
+	}
+	
+
+	@RequestMapping(value = "/modifier", method = RequestMethod.POST)
+	public ModelAndView modofierm(HttpServletRequest request) throws RemoteException, NotBoundException {
+		
+
+		Mission mission =  new Mission();
+		
+		renseigneMissionDepuisFormulaire(mission,request);		
+		
+		// Affichage recap mission + waypoint
+		ModelAndView model = new ModelAndView("map");
+		
+		model.addObject("title", "");
+			
+		return model;
+		
+	}
+	
+	
+	
+	/**
+	 * 
+	 * A partir des formulaires de cr�ation/modification de mission
+	 * Renseigne une mission vierge avec les informations du formulaire
+	 * 
+	 * @param mission
+	 * @param request
+	 */
+	private void renseigneMissionDepuisFormulaire(Mission mission,HttpServletRequest request){		
+
 		CoordGps coordGps_dep = new CoordGps();
 		CoordGps coordGps_ar = new CoordGps();
 				
@@ -112,136 +166,6 @@ public class ControllerDefault {
 		mission.setDensite(densite);
 		mission.setPeriode(periode);
 		mission.setNb_drone(nbDrone);
-		
-		
-		try {
-			
-			getFabriqueMission().saveMission(mission);
-			
-			System.out.println("Mission" + mission + "enregistr�e par RMI ");
-			// Demande Calcul du wayPoint en rmi
-			// RelevePoint WayPointMission(mission);
-            System.out.println("Mission enregistr�e par RMI ");            
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 
-		
-		// Affichage recap mission + waypoint
-		ModelAndView model = new ModelAndView("map");
-		
-		model.addObject("title", mission.getName());
-			
-		return model;
 	}
-	
-	@RequestMapping(value = "/trajet", method = RequestMethod.GET)
-	public ModelAndView trajet(){
-
-		ModelAndView model = new ModelAndView("creerTrajet");
-				 
-		return model;
-	}
-//	@RequestMapping(value = "/map", method = RequestMethod.GET)
-//	public ModelAndView map(){
-// 
-//		ModelAndView model = new ModelAndView("map");
-//		model.addObject("titrePage", "Carte du Canal du Midi");
-//		model.addObject("lat", Double.toString(coordGpsDao.get(1).getLattitude()));
-//		model.addObject("long", Double.toString(coordGpsDao.get(1).getLongitude()));
-//		List<CoordGps> liste = coordGpsDao.list();
-//		model.addObject("scriptPoints", this.GetPoints(liste));
-//		model.addObject("scriptPolyline", this.GetPolyline(liste.size()));
-//		model.addObject("lastPosIndex", Integer.toString(liste.size()));
-//		return model;
-//	}
-//
-//	private String GetPoints(List<CoordGps> liste) {
-//		String script = "";
-//		int index = 1;
-//		for (CoordGps coordGps : liste) {
-//			script += "var pos" + index + "=new google.maps.LatLng(" + coordGps.getLattitude() + ", " + coordGps.getLongitude() + ");\r\n";
-//			index++;
-//		}
-//		return script;
-//	}
-//	
-//	private String GetPolyline(int listSize) {
-//		String script = "[";
-//		for (int i = 1; i < listSize; i++) {
-//			script += "pos" + i + ",";
-//		}
-//		script += "pos" + listSize + "]\r\n";
-//		return script;
-//	}
-//	
-//	@RequestMapping(value = "/creationMission", method = RequestMethod.GET)
-//	public ModelAndView creationMission(){
-//		
-//		ModelAndView model = new ModelAndView("creationMission");
-//		System.out.println("Configuration de la mission");
-//		
-//		return null;
-//		//return model;
-//	}
-//	
-//	@RequestMapping(value = "/enregistrerMission", method = RequestMethod.POST)
-//    public ModelAndView enregistrerMission(@ModelAttribute Mission mission) {
-//		/**
-//		 * Contrôle de la cohérence de la mission
-//		 */
-//		MissionDAO missionDao = new MissionDAO();
-//		missionDao.saveOrUpdate(mission);
-//		
-//		ModelAndView model = new ModelAndView("recapCreationMission");
-//		model.addObject("mission", mission);
-//		
-//		System.out.println("Mission enregistré");
-//		return null;
-//        //return model;
-//    }
-//	
-//	@RequestMapping(value = "/lancementMission", method = RequestMethod.POST)
-//    public ModelAndView lancementMission(@ModelAttribute Mission mission) {
-//		/**
-//		 * Contrôle de la cohérence de la mission
-//		 */
-//		System.out.println("Vérification de la liste des drones");
-//		envoiMissionDrone();
-//		
-//		ModelAndView model = new ModelAndView("validationLancementMission");
-//		model.addObject("mission", mission);
-//		
-//		return null;
-//        //return model;
-//    }
-//
-//	@RequestMapping(value = "/transfertTampon", method = RequestMethod.POST)
-//    public ModelAndView transfertTampon(@RequestParam("donnees_json") String donnees_json, 
-//    		@RequestParam("id_mission") String id_mission) {
-//		/**
-//		 * Contrôle de la cohérence de la mission
-//		 */
-//		System.out.println("Récupération des données partielles de la mission");
-//		enregistrerDonneesTampon(donnees_json, id_mission);
-//
-//		
-//		System.out.println("Mission enregistré");
-//		return null;
-//        //return model;
-//    }
-//	
-//	
-//	private void enregistrerDonneesTampon(String donnees_json, String id_mission) {
-//		System.out.println("Enregistrement des données partielles en base");
-//	}
-//
-//	/**
-//	 * méthode présente dans une classe de service qui contrôle les objets distribués
-//	 */
-//	private void envoiMissionDrone() {
-//		System.out.println("Transmission de la mission au drone");
-//	}
-//	
 	
 }
