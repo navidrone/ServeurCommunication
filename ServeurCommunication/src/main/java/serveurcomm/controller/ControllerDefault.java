@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import rmi.FabriqueMissionInt;
@@ -24,9 +25,7 @@ public class ControllerDefault {
 	public ModelAndView helloWorld(){
 
 		ModelAndView model = new ModelAndView("accueil");
-		model.addObject("titrePage", "accueil");
-		model.addObject("msg", "hello world");
-		model.addObject("autre", "Message spécial");
+		model.addObject("titrePage", "Navidrone");
 		
 		 try {
 
@@ -107,8 +106,8 @@ public class ControllerDefault {
 		return model;
 	}
 	
-	@RequestMapping(value = "/trajet", method = RequestMethod.GET)
-	public ModelAndView trajet(){
+	@RequestMapping(value = "/modifier", method = RequestMethod.GET)
+	public ModelAndView modifier(HttpServletRequest request){
 
 		ModelAndView model = new ModelAndView("creerTrajet");
 				 
