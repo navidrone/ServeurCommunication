@@ -13,8 +13,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import rmi.FabriqueMissionInt;
 import rmi.MissionInt;
+import rmi.ReleveInt;
 import serveurcomm.modele.bean.CoordGps;
 import serveurcomm.modele.bean.Mission;
+import serveurcomm.modele.bean.Releve;
 
 @Controller
 public class ControllerDefault {
@@ -51,22 +53,7 @@ public class ControllerDefault {
 		model.addObject("titrePage", "accueil");
 		model.addObject("msg", "hello world");
 		model.addObject("autre", "Message spécial");
-		
-		 try {
-
-	            FabriqueMissionInt stub =  (FabriqueMissionInt) Naming.lookup("rmi://localhost:1099/FabriqueMission");
-	            Mission mission = (Mission) stub.getMission(0);
-	            System.out.println("mission: " + mission);            
-
-	    		
-	    		model.addObject("nom", mission.getId());
-	    		model.addObject("prenom", "Mission laodée par RMI");
-	            
-	        } catch (Exception e) {
-	            System.err.println("Client exception: " + e.toString());
-	            e.printStackTrace();
-	        }
-		 
+				 
 		return model;
 	}
 	
@@ -76,9 +63,12 @@ public class ControllerDefault {
 		ModelAndView model = new ModelAndView("creerMission");
 		try{
 
-			MissionInt mission = getFabriqueMission().getMission(1);
+			//MissionInt mission = new Mission(getFabriqueMission().getMission(1));
+			
+			MissionInt mission = (MissionInt)getFabriqueMission().getMission(1);
 			
 			System.out.println("Accès RMI à la mission 1 : "+mission.getName());
+			System.out.println("Arborescence OK ? "+mission.getCoord_ar());
 			
 		}catch (Exception e){
 			e.printStackTrace();
@@ -116,7 +106,7 @@ public class ControllerDefault {
 		coordGps_dep.setLongitude(dLat);
 		coordGps_dep.setLongitude(dLong);
 		
-		mission.setTitre(title);
+		mission.setName(title);
 		mission.setType(type);
 		mission.setCoord_dep(coordGps_dep);
 		mission.setDensite(densite);
@@ -140,7 +130,7 @@ public class ControllerDefault {
 		// Affichage recap mission + waypoint
 		ModelAndView model = new ModelAndView("map");
 		
-		model.addObject("title", mission.getTitre());
+		model.addObject("title", mission.getName());
 			
 		return model;
 	}

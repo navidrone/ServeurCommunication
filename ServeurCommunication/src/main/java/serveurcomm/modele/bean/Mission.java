@@ -3,26 +3,23 @@ package serveurcomm.modele.bean;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.springframework.beans.BeanUtils;
 
+import rmi.CoordGpsInt;
 import rmi.DroneInt;
 import rmi.MissionInt;
 import rmi.ReleveInt;
 
 public class Mission extends UnicastRemoteObject implements Serializable,MissionInt{
 
-
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String titre;
+	private String name;
 	private String type;
 	private CoordGps coord_dep;
 	private CoordGps coord_ar;
@@ -31,8 +28,53 @@ public class Mission extends UnicastRemoteObject implements Serializable,Mission
 	private Double densite;
 	private Double portee;
 	
+    private ArrayList<ReleveInt> releve;
+    private ArrayList<DroneInt> flotte;
+
+	
 	public Mission() throws RemoteException {
 		super();
+	}
+	
+	public Mission(MissionInt missionInt) throws RemoteException {
+		super();
+
+		this.name = missionInt.getName() ;
+		this.type = missionInt.getType() ;
+		this.periode = missionInt.getPeriode() ;
+		this.densite = missionInt.getDensite() ;
+		this.portee = missionInt.getPortee() ;
+		this.coord_dep = (CoordGps)missionInt.getCoord_dep();
+		this.coord_ar = (CoordGps)missionInt.getCoord_ar();
+		
+		ArrayList<Releve> releveList = new ArrayList<Releve>();
+		ArrayList<Drone>  droneList  = new ArrayList<Drone>();
+		
+		if(missionInt.getReleve() != null){
+			
+			for(ReleveInt releveInt:missionInt.getReleve()){
+				Releve r = new Releve();
+				BeanUtils.copyProperties(releveInt, r);
+				releveList.add(r);
+			}
+			
+		}
+
+		if(missionInt.getFlotte() != null){
+		
+			for(DroneInt droneInt:missionInt.getFlotte()){
+				Drone d = new Drone();
+				BeanUtils.copyProperties(droneInt, d);
+				droneList.add(d);
+			}
+			
+		}
+		this.nbDrone = droneList.size() ;
+		
+		this.setReleve(releveList);
+		this.setFlotte(droneList);
+		
+		
 	}
 
 	private Integer id;
@@ -45,14 +87,6 @@ public class Mission extends UnicastRemoteObject implements Serializable,Mission
 		this.id = id;
 	}
 
-	public String getTitre() {
-		return titre;
-	}
-
-	public void setTitre(String titre) {
-		this.titre = titre;
-	}
-
 	public String getType() {
 		return type;
 	}
@@ -61,20 +95,20 @@ public class Mission extends UnicastRemoteObject implements Serializable,Mission
 		this.type = type;
 	}
 
-	public CoordGps getCoord_dep() {
+	public CoordGpsInt getCoord_dep() {
 		return coord_dep;
 	}
 
-	public void setCoord_dep(CoordGps coord_dep) {
-		this.coord_dep = coord_dep;
+	public void setCoord_dep(CoordGpsInt coord_dep) {
+		this.coord_dep = (CoordGps)coord_dep;
 	}
 
 	public CoordGps getCoord_ar() {
 		return coord_ar;
 	}
 
-	public void setCoord_ar(CoordGps coord_ar) {
-		this.coord_ar = coord_ar;
+	public void setCoord_ar(CoordGpsInt coord_ar) {
+		this.coord_ar = (CoordGps)coord_ar;
 	}
 
 	public Double getPeriode() {
@@ -111,37 +145,33 @@ public class Mission extends UnicastRemoteObject implements Serializable,Mission
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return titre;
+		return name;
 	}
 
 	@Override
 	public void setName(String name) {
-		titre = name;		
+		this.name = name;		
 	}
 
 	@Override
 	public List<? extends ReleveInt> getReleve() {
-		// TODO Auto-generated method stub
-		return null;
+		return releve;
 	}
 
 	@Override
 	public void setReleve(List<? extends ReleveInt> releve) {
-		// TODO Auto-generated method stub
+		this.releve = (ArrayList<ReleveInt>)releve;
 		
 	}
 
 	@Override
 	public List<? extends DroneInt> getFlotte() {
-		// TODO Auto-generated method stub
-		return null;
+		return flotte;
 	}
 
 	@Override
 	public void setFlotte(List<? extends DroneInt> flotte) {
-		// TODO Auto-generated method stub
-		
+		this.flotte = (ArrayList<DroneInt>)flotte;
 	}
 
 	
