@@ -13,10 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import rmi.FabriqueMissionInt;
 import rmi.MissionInt;
-import rmi.ReleveInt;
 import serveurcomm.modele.bean.CoordGps;
 import serveurcomm.modele.bean.Mission;
-import serveurcomm.modele.bean.Releve;
 
 @Controller
 public class ControllerDefault {
@@ -68,7 +66,7 @@ public class ControllerDefault {
 			MissionInt mission = (MissionInt)getFabriqueMission().getMission(1);
 			
 			System.out.println("Accès RMI à la mission 1 : "+mission.getName());
-			System.out.println("Arborescence OK ? "+mission.getCoord_ar());
+			System.out.println("Arborescence OK ? "+mission.getCoord_ar().getLattitude());
 			
 		}catch (Exception e){
 			e.printStackTrace();
@@ -132,7 +130,7 @@ public class ControllerDefault {
 	 * @param mission
 	 * @param request
 	 */
-	private void renseigneMissionDepuisFormulaire(Mission mission,HttpServletRequest request){		
+	private void renseigneMissionDepuisFormulaire(Mission mission,HttpServletRequest request) throws RemoteException{		
 
 		CoordGps coordGps_dep = new CoordGps();
 		CoordGps coordGps_ar = new CoordGps();

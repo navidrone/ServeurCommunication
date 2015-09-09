@@ -103,7 +103,7 @@ public class Mission extends UnicastRemoteObject implements Serializable,Mission
 		this.coord_dep = (CoordGps)coord_dep;
 	}
 
-	public CoordGps getCoord_ar() {
+	public CoordGpsInt getCoord_ar() {
 		return coord_ar;
 	}
 
@@ -131,8 +131,8 @@ public class Mission extends UnicastRemoteObject implements Serializable,Mission
 		return densite;
 	}
 
-	public void setDensite(Double densite2) {
-		this.densite = densite2;
+	public void setDensite(Double densite) {
+		this.densite = densite;
 	}
 
 	public Double getPortee() {

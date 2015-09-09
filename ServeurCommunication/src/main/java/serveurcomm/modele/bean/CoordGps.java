@@ -1,6 +1,8 @@
 package serveurcomm.modele.bean;
 
 import java.io.Serializable;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,14 +14,14 @@ import javax.persistence.Table;
 
 import rmi.CoordGpsInt;
 
-public class CoordGps implements Serializable,CoordGpsInt{
+public class CoordGps extends UnicastRemoteObject implements Serializable,CoordGpsInt{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public CoordGps() {
+	public CoordGps() throws RemoteException{
 		super();
 	}
 	
