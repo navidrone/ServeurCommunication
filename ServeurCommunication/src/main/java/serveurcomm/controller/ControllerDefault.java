@@ -46,7 +46,7 @@ public class ControllerDefault {
 		return fabriqueMission;
 	}
 		
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/accueil", method = RequestMethod.GET)
 	public ModelAndView helloWorld(){
 
 		ModelAndView model = new ModelAndView("accueil");
@@ -120,6 +120,16 @@ public class ControllerDefault {
 	}
 	
 	@RequestMapping(value = "/missions", method = RequestMethod.GET)
+	public ModelAndView missions() throws RemoteException, NotBoundException {
+	
+		//List<MissionInt> missions = (List<MissionInt>)getFabriqueMission().getListMission();
+		ModelAndView model = new ModelAndView("listMissions");
+		//model.addObject("missions", missions);
+		return model;
+        
+    }
+	
+	@RequestMapping(value = "/missions", method = RequestMethod.POST)
 	public ModelAndView missions(@RequestParam ("id") int id) throws RemoteException, NotBoundException {
 	
 		List<MissionInt> missions = (List<MissionInt>)getFabriqueMission().getListMission();

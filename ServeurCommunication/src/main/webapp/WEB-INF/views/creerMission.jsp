@@ -73,9 +73,9 @@
 	<div class="slide-bar">
 		<div class= "nav">
 		 <ul>
-		 	<li> <a href="">Accueil</a> </li>
+		 	<li> <a href="accueil">Accueil</a></li>
 		 	<li><a href="creer"> Créer mission</a></li>
-		 	<li><a href="liste-missions.html"> Liste missions</a>  </li>
+		 	<li><a href="missions"> Liste missions</a>  </li>
 		 </ul>
 		</div>
 	

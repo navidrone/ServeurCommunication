@@ -17,21 +17,22 @@
 	<div class="slide-bar">
 		<div class= "nav">
 		 <ul>
-		 	<li> <a href="">Accueil</a> </li>
+		 	<li> <a href="accueil">Accueil</a></li>
 		 	<li><a href="creer"> Créer mission</a></li>
-		 	<li><a href="liste-missions.html"> Liste missions</a>  </li>
+		 	<li><a href="missions"> Liste missions</a>  </li>
 		 </ul>
 		</div>
 	
 	</div>
 	
-	<div class ="containe">
+	<div class ="containe" >
+		<h1 class="titreRecherche">${titrePage}</h1>	
+		<br>	
 			
-		<br>		
-					
+				
 		<img alt="importer" src="resources/images/midi.png">
 		<br>
-		<h1 class="titreRecherche">${titrePage}</h1>
+		
 						
 	</div>
 

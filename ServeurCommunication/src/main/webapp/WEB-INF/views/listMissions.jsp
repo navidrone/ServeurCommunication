@@ -1,11 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" isELIgnored="false"
-    pageEncoding="ISO-8859-1"%>
 <%@page import="org.springframework.context.annotation.Import"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <!doctype html>
+
 
 <html>
 <head>
@@ -15,7 +12,21 @@
 </head>
 
 <body>
-	<table id="missions" >
+<div class="containP">
+	<div class="slide-bar">
+		<div class= "nav">
+		 <ul>
+		 	<li> <a href="accueil">Accueil</a></li>
+		 	<li><a href="creer"> Créer mission</a></li>
+		 	<li><a href="missions"> Liste missions</a>  </li>
+		 </ul>
+		</div>
+	
+	</div>
+	
+	<div class ="containe">
+	
+		<table id="missions" >
 				<thead>
 					<tr>
 						<th> Mission </th>
@@ -37,6 +48,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
-
+	</div>
+</div>
 </body>
 </html>
