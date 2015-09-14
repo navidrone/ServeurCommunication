@@ -7,9 +7,65 @@
 <head>
 <meta charset="utf8">
 <title>Nouvelle mission</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<!-- Elément Google Maps indiquant que la carte doit être affiché en plein écran et
+		qu'elle ne peut pas être redimensionnée par l'utilisateur -->
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+		<!-- Inclusion de l'API Google MAPS -->
+		<!-- Le paramètre "sensor" indique si cette application utilise détecteur pour déterminer la position de l'utilisateur -->
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+		<script type="text/javascript">
+			function initialiser() {
+				var latlng = new google.maps.LatLng(43.5694545840826, 1.4707356691360474);
+				//objet contenant des propriétés avec des identificateurs prédéfinis dans Google Maps permettant
+				//de définir des options d'affichage de notre carte
+				var options = {
+					center: latlng,
+					zoom: 15,
+					mapTypeId: google.maps.MapTypeId.ROADMAP
+				};
+				
+				//constructeur de la carte qui prend en paramêtre le conteneur HTML
+				//dans lequel la carte doit s'afficher et les options
+				var carte = new google.maps.Map(document.getElementById("carte"), options);
+				
+				/****************Nouveau code****************/
+
+	//création du marqueur
+	marqueur = new google.maps.Marker({
+		position: new google.maps.LatLng(43.5694545840826, 1.4707356691360474),
+		map: carte,
+		draggable: true
+	});
+	
+	marqueur_ar = new google.maps.Marker({
+		position: new google.maps.LatLng(43.56621296215132, 1.471518874168396),
+		map: carte,
+		draggable: true
+	});
+	
+	google.maps.event.addListener(marqueur_dep, 'drag', function(event) {
+		//message d'alerte affichant la nouvelle position du marqueur
+		alert("La nouvelle coordonnée du marqueur est : "+event.latLng);
+		document.getElementById("latitude") = event.latLng.lat();
+		var longitude_dep = event.latLng.lng();		
+	});
+	
+	google.maps.event.addListener(marqueur_ar, 'drag', function(event) {
+		//message d'alerte affichant la nouvelle position du marqueur
+		alert("La nouvelle coordonnée du marqueur est : "+event.latLng);
+		var latitude_ar = event.latLng.lat();
+		var longitude_ar = event.latLng.lng();		
+	});
+	/********************************************/
+	
+	
+			}
+		</script>
+
 <link rel="stylesheet" href="resources/css/style.css">
 </head>
-<body>
+<body onload="initialiser()">
 
 
 
@@ -36,9 +92,9 @@
 				<label> Toc : </label><input type="radio" name="type" onclick="toggle_div('toc','arrivee');" value='toc'>
 			</div>
 			
-			<div class= 'maps'>
+			<div id="carte" style="width:60%; height:35%"></div>
 			 
-			</div>
+			
 			
 			<div class="data">
 				<div class="depart">

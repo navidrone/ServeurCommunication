@@ -3,12 +3,14 @@ package serveurcomm.controller;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import rmi.FabriqueMissionInt;
@@ -48,9 +50,7 @@ public class ControllerDefault {
 	public ModelAndView helloWorld(){
 
 		ModelAndView model = new ModelAndView("accueil");
-		model.addObject("titrePage", "accueil");
-		model.addObject("msg", "hello world");
-		model.addObject("autre", "Message spécial");
+		model.addObject("titrePage", "Navidrone");
 				 
 		return model;
 	}
@@ -104,7 +104,7 @@ public class ControllerDefault {
 	
 
 	@RequestMapping(value = "/modifier", method = RequestMethod.POST)
-	public ModelAndView modofierm(HttpServletRequest request) throws RemoteException, NotBoundException {
+	public ModelAndView modifier(HttpServletRequest request) throws RemoteException, NotBoundException {
 		
 
 		Mission mission =  new Mission();
@@ -112,13 +112,36 @@ public class ControllerDefault {
 		renseigneMissionDepuisFormulaire(mission,request);		
 		
 		// Affichage recap mission + waypoint
-		ModelAndView model = new ModelAndView("map");
+		ModelAndView model = new ModelAndView("testMap");
 		
-		model.addObject("title", "");
 			
 		return model;
 		
 	}
+	
+	@RequestMapping(value = "/missions", method = RequestMethod.GET)
+	public ModelAndView missions(@RequestParam ("id") int id) throws RemoteException, NotBoundException {
+	
+		List<MissionInt> missions = (List<MissionInt>)getFabriqueMission().getListMission();
+		ModelAndView model = new ModelAndView("missions");
+		model.addObject("missions", missions);
+		return model;
+        
+    }
+	
+	/**
+	 @RequestMapping(value = "/recap", method = RequestMethod.GET)
+	public ModelAndView recap(@RequestParam ("id") int id) throws RemoteException, NotBoundException {
+	
+		
+		
+	//	List<CoordGpsInt> coordGPS = getCoordGps().getCoordGps(releve);
+		ModelAndView model = new ModelAndView("recap");
+		
+		return model;
+        
+    }
+	 */
 	
 	@RequestMapping(value = "/map", method = RequestMethod.GET)
 	public ModelAndView map(){
