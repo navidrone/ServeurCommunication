@@ -120,7 +120,13 @@ public class ControllerDefault {
 		
 	}
 	
-	
+	@RequestMapping(value = "/map", method = RequestMethod.GET)
+	public ModelAndView map(){
+
+		ModelAndView model = new ModelAndView("testMap");
+						 
+		return model;
+	}
 	
 	/**
 	 * 
