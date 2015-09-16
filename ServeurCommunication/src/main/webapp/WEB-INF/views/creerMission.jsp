@@ -1,7 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
 
 	<head>
-		<title>Google Maps</title>
+		<title>Nouvelle mission</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 		<link rel="stylesheet" href="resources/css/style.css">
 		<!-- Elément Google Maps indiquant que la carte doit être affiché en plein écran et

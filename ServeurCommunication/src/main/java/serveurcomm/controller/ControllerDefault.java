@@ -95,7 +95,7 @@ public class ControllerDefault {
 		} 
 		
 		// Affichage recap mission + waypoint
-		ModelAndView model = new ModelAndView("map");
+		ModelAndView model = new ModelAndView("testMap");
 		
 		model.addObject("title", mission.getName());
 			
@@ -161,6 +161,8 @@ public class ControllerDefault {
 		return model;
 	}
 	
+	
+	
 	/**
 	 * 
 	 * A partir des formulaires de création/modification de mission
@@ -189,12 +191,12 @@ public class ControllerDefault {
 			
 			Double aLong = Double.parseDouble(request.getParameter("aLong"));
 			Double aLat = Double.parseDouble(request.getParameter("aLat"));	
-			coordGps_ar.setLongitude(aLat);
+			coordGps_ar.setLattitude(aLat);
 			coordGps_ar.setLongitude(aLong);	
 			mission.setCoord_ar(coordGps_ar);	
 		}
 		
-		coordGps_dep.setLongitude(dLat);
+		coordGps_dep.setLattitude(dLat);
 		coordGps_dep.setLongitude(dLong);
 		
 		mission.setName(title);
