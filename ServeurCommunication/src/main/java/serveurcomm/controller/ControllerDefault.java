@@ -60,8 +60,6 @@ public class ControllerDefault {
 
 		ModelAndView model = new ModelAndView("creerMission");
 		try{
-
-			//MissionInt mission = new Mission(getFabriqueMission().getMission(1));
 			
 			MissionInt mission = (MissionInt)getFabriqueMission().getMission(1);
 			
@@ -86,18 +84,14 @@ public class ControllerDefault {
 			getFabriqueMission().saveMission(mission);
 			
 			System.out.println("Mission" + mission + "enregistrée par RMI ");
-			// Demande Calcul du wayPoint en rmi
-			// RelevePoint WayPointMission(mission);
             System.out.println("Mission enregistrée par RMI ");            
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
 		
-		// Affichage recap mission + waypoint
-		ModelAndView model = new ModelAndView("testMap");
-		
-		model.addObject("title", mission.getName());
+		// A faire - fonction listMission
+		ModelAndView model = new ModelAndView("listMission");
 			
 		return model;
 	}
@@ -132,26 +126,24 @@ public class ControllerDefault {
 	@RequestMapping(value = "/missions", method = RequestMethod.POST)
 	public ModelAndView missions(@RequestParam ("id") int id) throws RemoteException, NotBoundException {
 	
-		List<MissionInt> missions = (List<MissionInt>)getFabriqueMission().getListMission();
+		//List<MissionInt> missions = (List<MissionInt>)getFabriqueMission().getListMission();
 		ModelAndView model = new ModelAndView("missions");
-		model.addObject("missions", missions);
+		//model.addObject("missions", missions);
 		return model;
         
     }
 	
-	/**
-	 @RequestMapping(value = "/recap", method = RequestMethod.GET)
-	public ModelAndView recap(@RequestParam ("id") int id) throws RemoteException, NotBoundException {
+	
+	 @RequestMapping(value = "/vueMission", method = RequestMethod.GET)
+	public ModelAndView vueMission(@RequestParam ("id") int id) throws RemoteException, NotBoundException {
 	
 		
-		
-	//	List<CoordGpsInt> coordGPS = getCoordGps().getCoordGps(releve);
-		ModelAndView model = new ModelAndView("recap");
+		ModelAndView model = new ModelAndView("vueMission");
 		
 		return model;
         
     }
-	 */
+	 
 	
 	@RequestMapping(value = "/map", method = RequestMethod.GET)
 	public ModelAndView map(){
@@ -206,5 +198,7 @@ public class ControllerDefault {
 		mission.setPeriode(periode);
 		mission.setNb_drone(nbDrone);
 	}
+	
+	
 	
 }
