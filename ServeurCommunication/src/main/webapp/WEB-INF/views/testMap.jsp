@@ -24,36 +24,6 @@
 				//dans lequel la carte doit s'afficher et les options
 				var carte = new google.maps.Map(document.getElementById("carte"), options);
 				
-				/****************Nouveau code****************/
-
-				//création du marqueur
-				marqueur = new google.maps.Marker({
-					position: new google.maps.LatLng(43.5694545840826, 1.4707356691360474),
-					map: carte,
-					draggable: true
-				});
-				
-				marqueur_ar = new google.maps.Marker({
-					position: new google.maps.LatLng(43.56621296215132, 1.471518874168396),
-					map: carte,
-					draggable: true
-				});
-				
-				google.maps.event.addListener(marqueur_dep, 'drag', function(event) {
-					//message d'alerte affichant la nouvelle position du marqueur
-					alert("La nouvelle coordonnée du marqueur est : "+event.latLng);
-					
-					var longitude_dep = event.latLng.lng();		
-				});
-				
-				google.maps.event.addListener(marqueur_ar, 'drag', function(event) {
-					//message d'alerte affichant la nouvelle position du marqueur
-					alert("La nouvelle coordonnée du marqueur est : "+event.latLng);
-					var latitude_ar = event.latLng.lat();
-					var longitude_ar = event.latLng.lng();		
-				});
-				/********************************************/
-				
 			}
 		</script>
 	</head>

@@ -120,3 +120,33 @@ body{
 
 	float: right;
 }
+
+
+table {
+ border-collapse:collapse;
+ width:20%;
+ float: right;
+ }
+th, td {
+ border:1px solid black;
+ width:20%;
+ }
+td {
+ text-align:center;
+ }
+caption {
+ font-weight:bold
+ }
+ 
+ .maps-resultat{
+	
+	margin: 10px;
+	text-align: left;
+	height: 300px;
+
+	width: 70%;
+	float: left;
+
+	/*border: solid 1px;
+	background-image: url("../img/canalDuMidi.PNG");*/
+}
