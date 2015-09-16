@@ -53,9 +53,10 @@ public interface FabriqueMissionInt extends Remote {
 	 * 
 	 * Cette fonctionnalité est bloquée si la mission a déjà des relevés
 	 * 
-	 * @param mission
+	 * @param id
 	 * @throws RemoteException
 	 */
-	void calculeMission(MissionInt mission) throws RemoteException;
+	void calculeMission(int id) throws RemoteException;
+
 
 }
