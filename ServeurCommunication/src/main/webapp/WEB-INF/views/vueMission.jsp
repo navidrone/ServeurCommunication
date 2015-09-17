@@ -49,7 +49,7 @@
 	<div class ="containe">
 		
 			
-	<div id="carte" .class="maps-resultat"  style="width:70%; height:100% ; float: left;"></div>
+	<div id="carte" class="maps-resultat"  style="width:70%; height:100% ; float: left;"></div>
 			<div class="slide-bar-right">
 				<table>
 					<tr>
