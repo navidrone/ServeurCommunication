@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import rmi.CoordGpsInt;
 import rmi.FabriqueMissionInt;
 import rmi.MissionInt;
 import serveurcomm.modele.bean.CoordGps;
@@ -59,16 +60,6 @@ public class ControllerDefault {
 	public ModelAndView creer(){
 
 		ModelAndView model = new ModelAndView("creerMission");
-		try{
-			
-			MissionInt mission = (MissionInt)getFabriqueMission().getMission(1);
-			
-			System.out.println("Accès RMI à la mission 1 : "+mission.getName());
-			System.out.println("Arborescence OK ? "+mission.getCoord_ar().getLattitude());
-			
-		}catch (Exception e){
-			e.printStackTrace();
-		}
 				 
 		return model;
 	}
@@ -83,7 +74,7 @@ public class ControllerDefault {
 			
 			getFabriqueMission().saveMission(mission);
 			
-			System.out.println("Mission" + mission + "enregistrée par RMI ");
+			System.out.println("Mission" + mission.getName() + "enregistrée par RMI ");
             System.out.println("Mission enregistrée par RMI ");            
 
 		} catch (Exception e) {
@@ -96,7 +87,42 @@ public class ControllerDefault {
 		return model;
 	}
 	
-
+	
+	@RequestMapping(value = "/modifier", method = RequestMethod.GET)
+	public ModelAndView modifierm(@RequestParam ("id") int id) throws RemoteException, NotBoundException {			
+		
+		MissionInt mission = (MissionInt)getFabriqueMission().getMission(id);
+		String titre = mission.getName();
+		String type = mission.getType();
+		CoordGpsInt coord_ar = mission.getCoord_ar();
+		CoordGpsInt coord_dep = mission.getCoord_dep();
+		
+		Double aLat = coord_dep.getLattitude();
+		Double aLong = coord_dep.getLongitude();
+		
+		Double dLat = coord_ar.getLattitude();
+		Double dLong = coord_ar.getLongitude();
+		
+		Double periode = mission.getPeriode();
+		Double portee = mission.getPortee();
+		Double densite = mission.getDensite();
+		//Double nb_drone = mission.getNbdrone();
+		
+		ModelAndView model = new ModelAndView("modifierMission");
+		model.addObject("portee", portee);
+		model.addObject("periode", periode);
+		model.addObject("titre", titre);
+		model.addObject("type", type);
+		model.addObject("aLat", aLat);
+		model.addObject("aLong", aLong);
+		model.addObject("densite", densite);
+		model.addObject(mission);
+			
+		return model;
+		
+	}
+	
+	
 	@RequestMapping(value = "/modifier", method = RequestMethod.POST)
 	public ModelAndView modifier(HttpServletRequest request) throws RemoteException, NotBoundException {
 		
