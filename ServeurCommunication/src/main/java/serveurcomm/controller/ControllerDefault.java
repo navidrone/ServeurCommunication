@@ -106,13 +106,15 @@ public class ControllerDefault {
 		Double periode = mission.getPeriode();
 		Double portee = mission.getPortee();
 		Double densite = mission.getDensite();
-		//Double nb_drone = mission.getNbdrone();
+		//Ajout Drone
 		
 		ModelAndView model = new ModelAndView("modifierMission");
 		model.addObject("portee", portee);
 		model.addObject("periode", periode);
 		model.addObject("titre", titre);
 		model.addObject("type", type);
+		model.addObject("dLat", dLat);
+		model.addObject("dLong", dLong);
 		model.addObject("aLat", aLat);
 		model.addObject("aLong", aLong);
 		model.addObject("densite", densite);
@@ -131,25 +133,37 @@ public class ControllerDefault {
 		
 		renseigneMissionDepuisFormulaire(mission,request);		
 		
-		// Affichage recap mission + waypoint
-		ModelAndView model = new ModelAndView("testMap");
+		// A faire - fonction listMission
+		ModelAndView model = new ModelAndView("listMission");
 		
 			
 		return model;
 		
 	}
 	
-	@RequestMapping(value = "/missions", method = RequestMethod.GET)
-	public ModelAndView missions() throws RemoteException, NotBoundException {
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete(@RequestParam ("id") int id) throws RemoteException, NotBoundException {
 	
-		//List<MissionInt> missions = (List<MissionInt>)getFabriqueMission().getListMission();
-		ModelAndView model = new ModelAndView("listMissions");
-		//model.addObject("missions", missions);
+		getFabriqueMission().deleteMission(id);
+		
+		// A faire - fonction listMission
+		ModelAndView model = new ModelAndView("testMap");
+		
 		return model;
         
     }
 	
-	@RequestMapping(value = "/missions", method = RequestMethod.POST)
+	@RequestMapping(value = "/missions", method = RequestMethod.GET)
+	public ModelAndView missions() throws RemoteException, NotBoundException {
+	
+		List<MissionInt> missions = (List<MissionInt>)getFabriqueMission().getListMission();
+		ModelAndView model = new ModelAndView("listMissions");
+		model.addObject("missions", missions);
+		return model;
+        
+    }
+	
+	/*@RequestMapping(value = "/missions", method = RequestMethod.POST)
 	public ModelAndView missions(@RequestParam ("id") int id) throws RemoteException, NotBoundException {
 	
 		//List<MissionInt> missions = (List<MissionInt>)getFabriqueMission().getListMission();
@@ -157,7 +171,7 @@ public class ControllerDefault {
 		//model.addObject("missions", missions);
 		return model;
         
-    }
+    }*/
 	
 	
 	 @RequestMapping(value = "/vueMission", method = RequestMethod.GET)
@@ -171,13 +185,13 @@ public class ControllerDefault {
     }
 	 
 	
-	@RequestMapping(value = "/map", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/map", method = RequestMethod.GET)
 	public ModelAndView map(){
 
 		ModelAndView model = new ModelAndView("testMap");
 						 
 		return model;
-	}
+	}*/
 	
 	
 	
@@ -222,7 +236,9 @@ public class ControllerDefault {
 		mission.setCoord_dep(coordGps_dep);
 		mission.setDensite(densite);
 		mission.setPeriode(periode);
-		mission.setNb_drone(nbDrone);
+		
+		// Ajouter Drone
+		//mission.setNb_drone(nbDrone);
 	}
 	
 	
