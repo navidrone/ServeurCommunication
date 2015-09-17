@@ -174,16 +174,7 @@ public class ControllerDefault {
     }*/
 	
 	
-	 @RequestMapping(value = "/vueMission", method = RequestMethod.GET)
-	public ModelAndView vueMission(@RequestParam ("id") int id) throws RemoteException, NotBoundException {
 	
-		
-		ModelAndView model = new ModelAndView("vueMission");
-		
-		return model;
-        
-    }
-	 
 	
 	/*@RequestMapping(value = "/map", method = RequestMethod.GET)
 	public ModelAndView map(){
