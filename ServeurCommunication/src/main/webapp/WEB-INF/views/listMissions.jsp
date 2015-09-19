@@ -1,6 +1,7 @@
 <%@page import="org.springframework.context.annotation.Import"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 
 
@@ -26,9 +27,11 @@
 	
 	<div class ="containe">
 	
+		<h1> Liste des missions </h1>
 		<table id="missions" >
 				<thead>
 					<tr>
+						<th>  </th>
 						<th> Mission </th>
 						<th> Etat   </th>
 						<th> Actions   </th>
@@ -37,12 +40,13 @@
 				<tbody>
 					<c:forEach var="mission" items="${missions}">
 						<tr >
-							<td> ${mission.titre} </td>
-							<td> ${mission.etat} </td>
+							<td> ${mission.id} </td>
+							<td> ${mission.name} </td>
+							<td> </td>
 							<td>
 								<a href="modifier?id=${mission.id}">Modifier</a>
-								<a href="supprimer?id=${mission.id}">Supprimer</a>
-								<a href="suivi?id=${mission.id}">Suivi</a>
+								<a href="delete?id=${mission.id}">Supprimer</a>
+								<a href="vueMission?id=${mission.id}">Suivi</a>
 							</td>
 						</tr>
 					</c:forEach>

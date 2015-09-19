@@ -13,21 +13,20 @@
 		<script type="text/javascript">
 			function initialiser() {
 				var latlng = new google.maps.LatLng(43.5694545840826, 1.4707356691360474);
-				//objet contenant des propriétés avec des identificateurs prédéfinis dans Google Maps permettant
-				//de définir des options d'affichage de notre carte
+				
+				// options affichage de la carte
 				var options = {
 					center: latlng,
 					zoom: 15,
 					mapTypeId: google.maps.MapTypeId.ROADMAP
 				};
 				
-				//constructeur de la carte qui prend en paramêtre le conteneur HTML
-				//dans lequel la carte doit s'afficher et les options
+				//constructeur de la carte 
 				var carte = new google.maps.Map(document.getElementById("carte"), options);
 				
-				/****************Nouveau code****************/
+				
 
-				//crÃ©ation du marqueur
+				//création des marqueurs
 				marqueur_dep = new google.maps.Marker({
 					position: new google.maps.LatLng(43.5694545840826, 1.4707356691360474),
 					map: carte,
@@ -41,9 +40,6 @@
 				});
 				
 				google.maps.event.addListener(marqueur_dep, 'dragend', function(event) {
-					//message d'alerte affichant la nouvelle position du marqueur
-					//alert("La nouvelle coordonnÃ©e du marqueur est : "+event.latLng);
-					
 					var longitude_dep = event.latLng.lng();
 					var latitude_dep = event.latLng.lat();
 					
@@ -55,8 +51,6 @@
 				});
 				
 				google.maps.event.addListener(marqueur_ar, 'dragend', function(event) {
-					//message d'alerte affichant la nouvelle position du marqueur
-					//alert("La nouvelle coordonnÃ©e du marqueur est : "+event.latLng);
 					var latitude_ar = event.latLng.lat();
 					var longitude_ar = event.latLng.lng();
 					
@@ -66,9 +60,29 @@
 					var aLat = document.getElementById("aLat");
 					aLat.value = latitude_ar;
 				});
-				/********************************************/
+				
 				
 			}
+			
+			/********************************************/
+			
+			function Ajouter(form) {
+				var o=new Option(form.drone.value);
+				form.liste.options[form.liste.options.length]=o;
+			}
+			
+			function Supprimer(list) {
+				if (list.options.selectedIndex>=0) {
+					list.options[list.options.selectedIndex]=null;
+				} else {
+					alert("Suppression impossible : aucune ligne sélectionnée");
+				}
+			}
+
+			function SupprimerTout(list) {
+				list.options.length=0;
+			}
+			
 		</script>
 	</head>
 
@@ -125,10 +139,19 @@
 			<div class="param">
 				<span>Paramètre</span>
 					Période: <input type="text" name="periode">
-
-					Nombre de drones: <input type="text" name="nbDrone">
-
 					Densité du Maillage: <input type="text" name="densite">
+					
+					
+			<BR>
+			Nom du drone: <INPUT type="text" name="drone" size=15 >  
+			<INPUT type="button" Value="Ajouter" onClick="Ajouter(this.form)"> 
+			
+			Liste des drones:
+			<SELECT align=top name="liste" size=3 ">
+			</SELECT>
+			<INPUT type="button" value="Supprimer la sélection" onClick="Supprimer(this.form.liste)">
+			<INPUT type="button" value="Supprimer tout" onClick="SupprimerTout(this.form.liste)">
+			<BR><BR>		
 
 				</div>
 

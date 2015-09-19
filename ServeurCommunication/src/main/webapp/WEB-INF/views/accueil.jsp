@@ -20,7 +20,6 @@
 		 	<li> <a href="accueil">Accueil</a></li>
 		 	<li><a href="creer"> Créer mission</a></li>
 		 	<li><a href="missions"> Liste missions</a>  </li>
-		 	<li><a href="vueMission?id=1"> Vue Mission</a>  </li>
 		 </ul>
 		</div>
 	

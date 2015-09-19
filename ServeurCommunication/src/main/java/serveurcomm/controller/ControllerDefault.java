@@ -3,6 +3,8 @@ package serveurcomm.controller;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -63,10 +65,16 @@ public class ControllerDefault {
 				 
 		return model;
 	}
+	
 	@RequestMapping(value = "/creer", method = RequestMethod.POST)
 	public ModelAndView creerm(HttpServletRequest request) throws RemoteException, NotBoundException {
 		
 		Mission mission =  new Mission();
+		
+		/*ArrayList<String> listDrone = new ArrayList<String>(); 
+		listDrone = (ArrayList<String>)request.getSession().getAttribute("demo");
+		for(int i=0; i<listDrone.size(); i++) 
+            System.out.println(listDrone.get(i));*/
 		
 		renseigneMissionDepuisFormulaire(mission,request);		
 		
@@ -81,9 +89,10 @@ public class ControllerDefault {
 			e.printStackTrace();
 		} 
 		
-		// A faire - fonction listMission
-		ModelAndView model = new ModelAndView("listMission");
-			
+		List<MissionInt> missions = recupListMission();
+		ModelAndView model = new ModelAndView("listMissions");
+		model.addObject("missions", missions);
+		
 		return model;
 	}
 	
@@ -92,33 +101,9 @@ public class ControllerDefault {
 	public ModelAndView modifierm(@RequestParam ("id") int id) throws RemoteException, NotBoundException {			
 		
 		MissionInt mission = (MissionInt)getFabriqueMission().getMission(id);
-		String titre = mission.getName();
-		String type = mission.getType();
-		CoordGpsInt coord_ar = mission.getCoord_ar();
-		CoordGpsInt coord_dep = mission.getCoord_dep();
-		
-		Double aLat = coord_dep.getLattitude();
-		Double aLong = coord_dep.getLongitude();
-		
-		Double dLat = coord_ar.getLattitude();
-		Double dLong = coord_ar.getLongitude();
-		
-		Double periode = mission.getPeriode();
-		Double portee = mission.getPortee();
-		Double densite = mission.getDensite();
-		//Ajout Drone
 		
 		ModelAndView model = new ModelAndView("modifierMission");
-		model.addObject("portee", portee);
-		model.addObject("periode", periode);
-		model.addObject("titre", titre);
-		model.addObject("type", type);
-		model.addObject("dLat", dLat);
-		model.addObject("dLong", dLong);
-		model.addObject("aLat", aLat);
-		model.addObject("aLong", aLong);
-		model.addObject("densite", densite);
-		model.addObject(mission);
+		model.addObject("mission", mission);
 			
 		return model;
 		
@@ -130,11 +115,11 @@ public class ControllerDefault {
 		
 
 		Mission mission =  new Mission();
+		renseigneMissionDepuisFormulaire(mission,request);
 		
-		renseigneMissionDepuisFormulaire(mission,request);		
-		
-		// A faire - fonction listMission
-		ModelAndView model = new ModelAndView("listMission");
+		List<MissionInt> missions = recupListMission();
+		ModelAndView model = new ModelAndView("listMissions");
+		model.addObject("missions", missions);
 		
 			
 		return model;
@@ -146,8 +131,9 @@ public class ControllerDefault {
 	
 		getFabriqueMission().deleteMission(id);
 		
-		// A faire - fonction listMission
-		ModelAndView model = new ModelAndView("testMap");
+		List<MissionInt> missions = recupListMission();
+		ModelAndView model = new ModelAndView("listMissions");
+		model.addObject("missions", missions);
 		
 		return model;
         
@@ -156,33 +142,15 @@ public class ControllerDefault {
 	@RequestMapping(value = "/missions", method = RequestMethod.GET)
 	public ModelAndView missions() throws RemoteException, NotBoundException {
 	
-		List<MissionInt> missions = (List<MissionInt>)getFabriqueMission().getListMission();
+		
+		List<MissionInt> missions = recupListMission();
+		
 		ModelAndView model = new ModelAndView("listMissions");
 		model.addObject("missions", missions);
+		
 		return model;
         
     }
-	
-	/*@RequestMapping(value = "/missions", method = RequestMethod.POST)
-	public ModelAndView missions(@RequestParam ("id") int id) throws RemoteException, NotBoundException {
-	
-		//List<MissionInt> missions = (List<MissionInt>)getFabriqueMission().getListMission();
-		ModelAndView model = new ModelAndView("missions");
-		//model.addObject("missions", missions);
-		return model;
-        
-    }*/
-	
-	
-	
-	
-	/*@RequestMapping(value = "/map", method = RequestMethod.GET)
-	public ModelAndView map(){
-
-		ModelAndView model = new ModelAndView("testMap");
-						 
-		return model;
-	}*/
 	
 	
 	
@@ -204,7 +172,10 @@ public class ControllerDefault {
 		Double dLong = Double.parseDouble(request.getParameter("dLong"));
 		Double dLat = Double.parseDouble(request.getParameter("dLat"));
 		Double periode = Double.parseDouble(request.getParameter("periode"));
-		int nbDrone = Integer.parseInt(request.getParameter("nbDrone"));
+		
+		/*ArrayList<String> listDrone = new ArrayList<String>(); 
+		listDrone = (ArrayList<String>)request.getSession().getAttribute("liste");*/
+		
 		Double densite = Double.parseDouble(request.getParameter("densite"));
 		
 		if("toc".equals(type)){
@@ -229,9 +200,18 @@ public class ControllerDefault {
 		mission.setPeriode(periode);
 		
 		// Ajouter Drone
-		//mission.setNb_drone(nbDrone);
+		/*mission.setNb_drone(nbDrone);
+		for(int i=0; i<listDrone.size(); i++) 
+            System.out.println(listDrone.get(i));*/
 	}
 	
 	
+	private List<MissionInt> recupListMission() throws RemoteException{
+		
+		List<MissionInt> missions = new ArrayList<MissionInt>();
+		missions =(List<MissionInt>)getFabriqueMission().getListMission();
+		
+		return missions;
+	}
 	
 }
