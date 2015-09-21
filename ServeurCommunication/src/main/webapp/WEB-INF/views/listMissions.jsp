@@ -42,7 +42,7 @@
 						<tr >
 							<td> ${mission.id} </td>
 							<td> ${mission.name} </td>
-							<td> </td>
+							<td></td>
 							<td>
 								<a href="modifier?id=${mission.id}">Modifier</a>
 								<a href="delete?id=${mission.id}">Supprimer</a>

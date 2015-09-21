@@ -1,6 +1,4 @@
-<%@page import="org.springframework.context.annotation.Import"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 	<head>
@@ -92,8 +90,8 @@
 
 			<div class="type-mission">
 				 <span>Type de Mission </span> <br>
-				<label> Bathymetrie : </label> <input type="radio" name="type" onclick="toggle_div('bathymetrie','arrivee');" value='bathymetrie' >
-				<label> Toc : </label><input type="radio" name="type" onclick="toggle_div('toc','arrivee');" value='toc'>
+				<label> Bathymetrie : </label> <input type="radio" name="type" onclick="toggle_div('bathymetrie','arrivee');" value='bathymetrie' <c:if test="${mission.type eq 'bathymetrie'}">checked</c:if> >
+				<label> Toc : </label><input type="radio" name="type" onclick="toggle_div('toc','arrivee');" value='toc' <c:if test="${mission.type eq 'toc'}">checked</c:if> >
 			</div>
 			<div id="carte" style="width:100%; height:50%"></div>
 			 
@@ -102,21 +100,21 @@
 			<div class="data">
 				<div class="depart">
 					<span>Départ:</span>
-					Longitude: <input id="dLong"  type="text" name="dLong" value="" >
+					Longitude: <input id="dLong"  type="text" name="dLong" value="${coord_dep.longitude}" >
 					
-					Lattitude: <input id="dLat" type="text" name="dLat" value="">
+					Lattitude: <input id="dLat" type="text" name="dLat" value="${coord_dep.lattitude}">
 				</div>
 				
 				<div id="arrivee" class="arrivee">
 					<span>Arrivée:</span>
-					Longitude: <input id="aLong" type="text" name="aLong" value="">
+					Longitude: <input id="aLong" type="text" name="aLong" value="${coord_ar.longitude}">
 
-					Lattitude: <input id="aLat" type="text" name="aLat" value="">
+					Lattitude: <input id="aLat" type="text" name="aLat" value="${coord_ar.lattitude}">
 				</div>
 
 				<div id="porte" class="porte">
 					<span>Portée:</span>
-					Portée: <input type="text" name="portee" value="${mission.periode}">
+					Portée: <input type="text" name="portee" value="${mission.portee}">
 				</div>
 				
 			</div>
@@ -126,8 +124,13 @@
 					Période: <input type="text" name="periode" value="${mission.periode}">
 
 					Densité du Maillage: <input type="text" name="densite" value="${mission.densite}">
-
+					
+					<label for="listeDrone">Nom des drones, séparés par une virgule :</label>
+        		<textarea id="listeDrone" name="listeDrone" rows="1" cols="40" tabindex="40" value=listDrone
+ 				></textarea>
 				</div>
+				
+			<input type="hidden" name="id" value="${mission.id}" />
 
 				<div class="submit">
 					<button type="submit" class="btn btn-default">Enregistrer</button>

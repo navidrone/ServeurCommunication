@@ -141,19 +141,18 @@
 					Période: <input type="text" name="periode">
 					Densité du Maillage: <input type="text" name="densite">
 					
+					<label for="listeDrone">Nom des drones, séparés par une virgule :</label>
+        		<textarea id="listeDrone" name="listeDrone" rows="1" cols="40" tabindex="40" 
+ 				></textarea>
 					
-			<BR>
-			Nom du drone: <INPUT type="text" name="drone" size=15 >  
-			<INPUT type="button" Value="Ajouter" onClick="Ajouter(this.form)"> 
-			
-			Liste des drones:
-			<SELECT align=top name="liste" size=3 ">
-			</SELECT>
-			<INPUT type="button" value="Supprimer la sélection" onClick="Supprimer(this.form.liste)">
-			<INPUT type="button" value="Supprimer tout" onClick="SupprimerTout(this.form.liste)">
-			<BR><BR>		
+					
 
 				</div>
+				
+			<p>
+        		
+      		</p>
+				
 
 				<div class="submit">
 					<button type="submit" class="btn btn-default">Enregistrer</button>

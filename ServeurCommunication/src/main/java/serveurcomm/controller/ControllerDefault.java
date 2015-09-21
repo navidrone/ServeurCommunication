@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import rmi.CoordGpsInt;
+import rmi.DroneInt;
 import rmi.FabriqueMissionInt;
 import rmi.MissionInt;
 import serveurcomm.modele.bean.CoordGps;
@@ -71,11 +72,6 @@ public class ControllerDefault {
 		
 		Mission mission =  new Mission();
 		
-		/*ArrayList<String> listDrone = new ArrayList<String>(); 
-		listDrone = (ArrayList<String>)request.getSession().getAttribute("demo");
-		for(int i=0; i<listDrone.size(); i++) 
-            System.out.println(listDrone.get(i));*/
-		
 		renseigneMissionDepuisFormulaire(mission,request);		
 		
 		try {
@@ -92,7 +88,6 @@ public class ControllerDefault {
 		List<MissionInt> missions = recupListMission();
 		ModelAndView model = new ModelAndView("listMissions");
 		model.addObject("missions", missions);
-		
 		return model;
 	}
 	
@@ -101,10 +96,24 @@ public class ControllerDefault {
 	public ModelAndView modifierm(@RequestParam ("id") int id) throws RemoteException, NotBoundException {			
 		
 		MissionInt mission = (MissionInt)getFabriqueMission().getMission(id);
+		CoordGpsInt coord_ar = mission.getCoord_ar();
+		CoordGpsInt coord_dep = mission.getCoord_ar();
+		
+		/*List<DroneInt> drone = (List<DroneInt>) mission.getFlotte();
+		String var = drone.get(1).getName();
+		String listDrone="";
+		for(int i=0; i<drone.size(); i++) 
+		{
+            System.out.println(drone.get(i).getName());
+            listDrone = listDrone + drone.get(i).getName() + ",";
+		}*/
 		
 		ModelAndView model = new ModelAndView("modifierMission");
 		model.addObject("mission", mission);
-			
+		model.addObject("coord_ar", coord_ar);
+		model.addObject("coord_dep", coord_dep);
+		//model.addObject("listDrone", var );
+		
 		return model;
 		
 	}
@@ -113,9 +122,20 @@ public class ControllerDefault {
 	@RequestMapping(value = "/modifier", method = RequestMethod.POST)
 	public ModelAndView modifier(HttpServletRequest request) throws RemoteException, NotBoundException {
 		
-
+		System.out.print("Fonction modifiée");
 		Mission mission =  new Mission();
+		Integer id = Integer.parseInt(request.getParameter("id"));
+		System.out.print("id_mission" + id);
+		//mission.setId(id);
 		renseigneMissionDepuisFormulaire(mission,request);
+		
+		try {
+			
+			getFabriqueMission().saveMission(mission);           
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		List<MissionInt> missions = recupListMission();
 		ModelAndView model = new ModelAndView("listMissions");
@@ -173,9 +193,9 @@ public class ControllerDefault {
 		Double dLat = Double.parseDouble(request.getParameter("dLat"));
 		Double periode = Double.parseDouble(request.getParameter("periode"));
 		
-		/*ArrayList<String> listDrone = new ArrayList<String>(); 
-		listDrone = (ArrayList<String>)request.getSession().getAttribute("liste");*/
-		
+		String drone = (String)request.getParameter("listeDrone");
+		//System.out.print("affichage textarea" + drone +"\n" );
+			
 		Double densite = Double.parseDouble(request.getParameter("densite"));
 		
 		if("toc".equals(type)){
@@ -200,9 +220,9 @@ public class ControllerDefault {
 		mission.setPeriode(periode);
 		
 		// Ajouter Drone
-		/*mission.setNb_drone(nbDrone);
-		for(int i=0; i<listDrone.size(); i++) 
-            System.out.println(listDrone.get(i));*/
+		String listDrone[] = drone.split("\n");
+		for(int i=0; i<listDrone.length; i++) 
+            mission.addDrone(listDrone[i]);
 	}
 	
 	
