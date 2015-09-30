@@ -1,4 +1,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 
 	<head>
 		<title>Google Maps</title>
@@ -47,47 +49,37 @@
 	
 	</div>
 	<div class ="containe">
+		<div class="title">
+				Titre:   ${mission.name}
+			</div>
 		
 			
-	<div id="carte" class="maps-resultat"  style="width:70%; height:100% ; float: left;"></div>
+	<div id="carte" class="maps-resultat"  style="width:60%; height:80% ; float: left;"></div>
 			<div class="slide-bar-right">
-				<table>
+				<table class="table">
 					<tr>
-						<td>N</td>
-						<td>Latitude</td>
-						<td>Longitude</td>
-						<td>Profondeur</td>
-						<td>Dates</td>
+						<th class="th">N</th>
+						<th class="th">Latitude</th>
+						<th class="th">Longitude</th>
+						<th class="th">Profondeur</th>
+						<th class="th">Dates</th>
 					</tr>
+						
+		
+					
+					<c:set var="i" value="1" scope="page" />
+					
+					<c:forEach var="releve" items="${releves}">
 
 					<tr>
-						<td>1</td>
-						<td>1.666</td>
-						<td>1.777</td>
-						<td>5,5</td>
-						<td>10/09/2015 15H30</td>
+						<td class="td">${i}</td>
+						<td class="td">${releve.getCoordGps().lattitude}</td>
+						<td class="td">${releve.getCoordGps().longitude}</td>
+						<td class="td">${releve.getProfondeur()}</td>
+						<td class="td">${releve.getDateReleve()}</td>
 					</tr>
-					<tr>
-						<td>2</td>
-						<td>1.666</td>
-						<td>1.777</td>
-						<td>5,54</td>
-						<td>10/09/2015 15H30</td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td>1.666</td>
-						<td>1.777</td>
-						<td>5,57</td>
-						<td>10/09/2015 15H30</td>
-					</tr>
-					<tr>
-						<td>4</td>
-						<td>1.666</td>
-						<td>1.777</td>
-						<td>4,5</td>
-						<td>10/09/2015 15H30</td>
-					</tr>
+					<c:set var="i" value="${i + 1}" scope="page"/>
+					</c:forEach>
 					
 				</table>
 			</div>

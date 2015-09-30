@@ -121,22 +121,33 @@ body{
 	float: right;
 }
 
-
 table {
  border-collapse:collapse;
- width:20%;
- float: right;
+ width:95%;
+ margin: 10px;
  }
 th, td {
- border:1px solid black;
- width:20%;
+  border:1px solid black; 
+ 
+ }
+
+.table {
+ border-collapse:collapse;
+ width:30%;
+ float: right;
+ margin: 10px;
+ }
+ 
+.th, .td {
+  border:1px solid black; 
+ 
  }
 td {
  text-align:center;
  }
 caption {
  font-weight:bold
- }
+ } */
  
  .maps-resultat{
 	
