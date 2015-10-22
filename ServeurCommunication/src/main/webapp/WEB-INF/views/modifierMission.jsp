@@ -126,8 +126,7 @@
 					Densité du Maillage: <input type="text" name="densite" value="${mission.densite}">
 					
 					<label for="listeDrone">Nom des drones, séparés par une virgule :</label>
-        		<textarea id="listeDrone" name="listeDrone" rows="1" cols="40" tabindex="40" value=listDrone
- 				></textarea>
+        		<textarea id="listeDrone" name="listeDrone" cols="40" rows="1">${listDrone}</textarea>
 				</div>
 				
 			<input type="hidden" name="id" value="${mission.id}" />

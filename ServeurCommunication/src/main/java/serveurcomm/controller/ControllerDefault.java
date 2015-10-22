@@ -99,20 +99,28 @@ public class ControllerDefault {
 		CoordGpsInt coord_ar = mission.getCoord_ar();
 		CoordGpsInt coord_dep = mission.getCoord_ar();
 		
-		/*List<DroneInt> drone = (List<DroneInt>) mission.getFlotte();
-		String var = drone.get(1).getName();
-		String listDrone="";
-		for(int i=0; i<drone.size(); i++) 
-		{
-            System.out.println(drone.get(i).getName());
-            listDrone = listDrone + drone.get(i).getName() + ",";
-		}*/
+		List<DroneInt> drone = (List<DroneInt>) mission.getFlotte();
+		String listDrone = "Aucun Drone.";
+		
+		if(drone != null && !drone.isEmpty()){
+			listDrone = "";
+			for(int i=0; i<drone.size(); i++) 
+			{
+	            listDrone = listDrone + drone.get(i).getName();
+	            
+	            if(i<drone.size()-1)listDrone = listDrone +",";
+	            
+			}
+			
+		}
+		
+        System.out.println(listDrone);
 		
 		ModelAndView model = new ModelAndView("modifierMission");
 		model.addObject("mission", mission);
 		model.addObject("coord_ar", coord_ar);
 		model.addObject("coord_dep", coord_dep);
-		//model.addObject("listDrone", var );
+		model.addObject("listDrone", listDrone );
 		
 		return model;
 		
@@ -220,7 +228,7 @@ public class ControllerDefault {
 		mission.setPeriode(periode);
 		
 		// Ajouter Drone
-		String listDrone[] = drone.split("\n");
+		String listDrone[] = drone.split(",");
 		for(int i=0; i<listDrone.length; i++) 
             mission.addDrone(listDrone[i]);
 	}

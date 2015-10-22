@@ -176,13 +176,20 @@ public class Mission extends UnicastRemoteObject implements Serializable,Mission
 
 	@Override
 	public void addDrone(String droneName) throws RemoteException {
-		
-		
+		if(flotte== null)flotte = new ArrayList<DroneInt>();
+		this.flotte.add(new Drone(droneName));		
 	}
 
 	@Override
 	public void deleteDrone(String droneName) throws RemoteException {
-		// TODO Auto-generated method stub
+		if(flotte != null){
+			for(DroneInt d:this.flotte){
+				if(droneName.equals(d.getName())){
+					flotte.remove(d);
+				}
+			}
+		}
+		
 		
 	}
 

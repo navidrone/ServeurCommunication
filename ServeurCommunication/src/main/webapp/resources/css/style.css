@@ -108,11 +108,16 @@ body{
 
 .param{
 	margin: 10px;
-	
-
 	/*border:solid 1px;*/
 
 }
+
+.param textarea {
+	margin: 0px;
+	/*border:solid 1px;*/
+
+}
+
 .param span {padding: 8px 0; float:left; width : 100%;}
 
 .submit{

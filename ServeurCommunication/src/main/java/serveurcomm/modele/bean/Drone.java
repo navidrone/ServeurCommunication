@@ -4,6 +4,8 @@
 package serveurcomm.modele.bean;
 
 import java.io.Serializable;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,13 +20,22 @@ import rmi.DroneInt;
  *
  */
 
-public class Drone implements Serializable, DroneInt {
+public class Drone extends UnicastRemoteObject implements Serializable, DroneInt {
 	
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
 
 	private String name;
+	
+	public Drone() throws RemoteException{
+		super();
+	}
+	
+	public Drone(String name) throws RemoteException{
+		super();
+		this.name = name;
+	}
 
 	public Integer getId() {
 		return id;
