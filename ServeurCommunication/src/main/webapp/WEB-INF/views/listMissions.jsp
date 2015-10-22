@@ -33,7 +33,7 @@
 					<tr>
 						<th>  </th>
 						<th> Mission </th>
-						<th> Etat   </th>
+						<th> Type   </th>
 						<th> Actions   </th>
 					</tr>
 				</thead>
@@ -42,7 +42,7 @@
 						<tr >
 							<td> ${mission.id} </td>
 							<td> ${mission.name} </td>
-							<td></td>
+							<td> Type: ${mission.type} </td>
 							<td>
 								<a href="modifier?id=${mission.id}">Modifier</a>
 								<a href="delete?id=${mission.id}">Supprimer</a>

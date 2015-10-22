@@ -15,6 +15,8 @@
 		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 		<script type="text/javascript">
 			function initialiser() {
+										
+				var x = document.getElementById("parcours");
 				var latlng = new google.maps.LatLng(43.5694545840826, 1.4707356691360474);
 				//objet contenant des propriétés avec des identificateurs prédéfinis dans Google Maps permettant
 				//de définir des options d'affichage de notre carte
@@ -28,6 +30,24 @@
 				//dans lequel la carte doit s'afficher et les options
 				var carte = new google.maps.Map(document.getElementById("carte"), options);
 				
+				// Récupération des coordonnées GPS
+				
+				var parcoursBus = new Array();
+				for(var i= 0; i < x.length; i+2)
+				{
+					parcoursBus.push(new google.maps.LatLng(x[i], x[i+1]));
+				}
+				
+				var traceParcoursBus = new google.maps.Polyline({
+					path: parcoursBus,//chemin du tracé
+					strokeColor: "#FF0000",//couleur du tracé
+					strokeOpacity: 1.0,//opacité du tracé
+					strokeWeight: 2//grosseur du tracé
+				});
+				
+				//lier le tracé à la carte
+				//ceci permet au tracé d'être affiché sur la carte
+				traceParcoursBus.setMap(carte);
 			}
 		</script>
 	</head>
@@ -43,7 +63,6 @@
 		 	<li> <a href="accueil">Accueil</a></li>
 		 	<li><a href="creer"> Créer mission</a></li>
 		 	<li><a href="missions"> Liste missions</a>  </li>
-		 	<li><a href="vueMission?id=1"> Vue Mission</a>  </li>
 		 </ul>
 		</div>
 	
@@ -84,7 +103,7 @@
 				</table>
 			</div>
 			
-			
+			<input type="hidden" id="parcours" value="${parcours}" />
 	
 	
 

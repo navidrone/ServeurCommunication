@@ -3,6 +3,7 @@ package serveurcomm.controller;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -49,16 +50,23 @@ private FabriqueMissionInt fabriqueMission;
 		 MissionInt mission = (MissionInt)getFabriqueMission().getMission(id);
 		 
 		 List<? extends ReleveInt> listReleveInt = mission.getReleve();
-		 
+		 ArrayList parcours = new ArrayList();
 //		 for(ReleveInt r:listReleveInt){
 //
 //			 System.out.println("Client exception: " + r.getCoordGps().getLattitude());
 //		 }
-		
+		 for (int i=0; i<listReleveInt.size(); i++)
+		 {
+			 parcours.add(listReleveInt.get(i).getCoordGps().getLattitude());
+			 parcours.add(listReleveInt.get(i).getCoordGps().getLongitude());
+			 
+		 }
+			 
 			
 			ModelAndView model = new ModelAndView("vueMission");
 			model.addObject("mission",mission);
 			model.addObject("releves",listReleveInt);
+			model.addObject("parcours",parcours);
 			
 			return model;
 	        

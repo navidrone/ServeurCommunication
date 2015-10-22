@@ -134,7 +134,7 @@ public class ControllerDefault {
 		Mission mission =  new Mission();
 		Integer id = Integer.parseInt(request.getParameter("id"));
 		System.out.print("id_mission" + id);
-		//mission.setId(id);
+		mission.setId(id);
 		renseigneMissionDepuisFormulaire(mission,request);
 		
 		try {

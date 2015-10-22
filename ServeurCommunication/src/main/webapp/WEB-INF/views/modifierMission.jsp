@@ -13,12 +13,12 @@
 		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 		<script type="text/javascript">
 			function initialiser() {
-				var latlng = new google.maps.LatLng(43.5694545840826, 1.4707356691360474);
-			
-				//options d'affichage de la carte
+var latlng = new google.maps.LatLng(43.56900372145307, 1.4707356691360474);
+				
+				// options affichage de la carte
 				var options = {
 					center: latlng,
-					zoom: 15,
+					zoom: 17,
 					mapTypeId: google.maps.MapTypeId.ROADMAP
 				};
 				

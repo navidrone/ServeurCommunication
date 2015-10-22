@@ -12,12 +12,12 @@
 		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 		<script type="text/javascript">
 			function initialiser() {
-				var latlng = new google.maps.LatLng(43.5694545840826, 1.4707356691360474);
+				var latlng = new google.maps.LatLng(43.56900372145307, 1.4707356691360474);
 				
 				// options affichage de la carte
 				var options = {
 					center: latlng,
-					zoom: 15,
+					zoom: 17,
 					mapTypeId: google.maps.MapTypeId.ROADMAP
 				};
 				
@@ -34,7 +34,7 @@
 				});
 				
 				marqueur_ar = new google.maps.Marker({
-					position: new google.maps.LatLng(43.56621296215132, 1.471518874168396),
+					position: new google.maps.LatLng(43.56810198606921, 1.471443772315979),
 					map: carte,
 					draggable: true
 				});
