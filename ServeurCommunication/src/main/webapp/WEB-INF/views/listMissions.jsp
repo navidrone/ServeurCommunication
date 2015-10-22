@@ -15,9 +15,9 @@
 <body>
 <div class="containP">
 	<div class="slide-bar">
-		<div class= "nav">
+		<div id="cssmenu">
 		 <ul>
-		 	<li> <a href="accueil">Accueil</a></li>
+		 	<li class="active"> <a href="accueil">Accueil</a></li>
 		 	<li><a href="creer"> Créer mission</a></li>
 		 	<li><a href="missions"> Liste missions</a>  </li>
 		 </ul>
@@ -27,7 +27,7 @@
 	
 	<div class ="containe">
 	
-		<h1> Liste des missions </h1>
+		<h1 class="titreRecherche"> Liste des missions </h1>
 		<table id="missions" >
 				<thead>
 					<tr>

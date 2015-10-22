@@ -15,9 +15,9 @@
 
 <div class="containP">
 	<div class="slide-bar">
-		<div class= "nav">
+		<div id="cssmenu">
 		 <ul>
-		 	<li> <a href="accueil">Accueil</a></li>
+		 	<li class="active"> <a href="accueil">Accueil</a></li>
 		 	<li><a href="creer"> Créer mission</a></li>
 		 	<li><a href="missions"> Liste missions</a>  </li>
 		 </ul>
