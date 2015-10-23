@@ -101,12 +101,12 @@
 	</div>
 	<div class ="containe">
 		<form action="" method="post">
-			<div class="title">
+			<div class="title bold">
 				Titre:  <input type="text" name="title" >
 			</div>
 
 			<div class="type-mission">
-				 <span>Type de Mission </span> <br>
+				 <span class="bold white">Type de Mission </span> <br>
 				<label> Bathymetrie : </label> <input type="radio" name="type" onclick="toggle_div('bathymetrie','arrivee');" value='bathymetrie'>
 				<label> Toc : </label><input type="radio" name="type" onclick="toggle_div('toc','arrivee');" value='toc'>
 			</div>
@@ -116,28 +116,28 @@
 			
 			<div class="data">
 				<div class="depart">
-					<span>Départ:</span>
+					<span class="bold white">Départ</span>
 					Longitude: <input id="dLong"  type="text" name="dLong" value="" >
 					
 					Lattitude: <input id="dLat" type="text" name="dLat" value="">
 				</div>
 				
 				<div id="arrivee" class="arrivee">
-					<span>Arrivée:</span>
+					<span class="bold white">Arrivée</span>
 					Longitude: <input id="aLong" type="text" name="aLong" value="">
 
 					Lattitude: <input id="aLat" type="text" name="aLat" value="">
 				</div>
 
 				<div id="porte" class="porte">
-					<span>Portée:</span>
+					<span class="bold white">Portée</span>
 					Portée: <input type="text" name="portee">
 				</div>
 				
 			</div>
 
 			<div class="param">
-				<span>Paramètre</span>
+				<span class="bold white">Paramètres</span>
 					Période: <input type="text" name="periode">
 					Densité du Maillage: <input type="text" name="densite">
 					
@@ -155,7 +155,7 @@
 				
 
 				<div class="submit">
-					<button type="submit" class="btn btn-default">Enregistrer</button>
+					<button type="submit" class="wet-asphalt-flat-button">Enregistrer</button>
 					
 				</div>
 		</form>

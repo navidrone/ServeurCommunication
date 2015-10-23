@@ -72,9 +72,9 @@ var latlng = new google.maps.LatLng(43.56900372145307, 1.4707356691360474);
 		
 		<div class="containP">
 	<div class="slide-bar">
-		<div class= "nav">
+		<div id="cssmenu">
 		 <ul>
-		 	<li> <a href="accueil">Accueil</a></li>
+		 	<li class="active"> <a href="accueil">Accueil</a></li>
 		 	<li><a href="creer"> Créer mission</a></li>
 		 	<li><a href="missions"> Liste missions</a>  </li>
 		 </ul>
@@ -83,13 +83,13 @@ var latlng = new google.maps.LatLng(43.56900372145307, 1.4707356691360474);
 	</div>
 	<div class ="containe">
 		<form action="" method="post">
-			<div class="title">
+			<div class="title bold">
 				Titre: <input type="text" name="title"  value="${mission.name}"/>
 				
 			</div>
 
 			<div class="type-mission">
-				 <span>Type de Mission </span> <br>
+				 <span class="bold white">Type de Mission </span> <br>
 				<label> Bathymetrie : </label> <input type="radio" name="type" onclick="toggle_div('bathymetrie','arrivee');" value='bathymetrie' <c:if test="${mission.type eq 'bathymetrie'}">checked</c:if> >
 				<label> Toc : </label><input type="radio" name="type" onclick="toggle_div('toc','arrivee');" value='toc' <c:if test="${mission.type eq 'toc'}">checked</c:if> >
 			</div>
@@ -99,28 +99,28 @@ var latlng = new google.maps.LatLng(43.56900372145307, 1.4707356691360474);
 			
 			<div class="data">
 				<div class="depart">
-					<span>Départ:</span>
+					<span class="bold white">Départ</span>
 					Longitude: <input id="dLong"  type="text" name="dLong" value="${coord_dep.longitude}" >
 					
 					Lattitude: <input id="dLat" type="text" name="dLat" value="${coord_dep.lattitude}">
 				</div>
 				
 				<div id="arrivee" class="arrivee">
-					<span>Arrivée:</span>
+					<span class="bold white">Arrivée</span>
 					Longitude: <input id="aLong" type="text" name="aLong" value="${coord_ar.longitude}">
 
 					Lattitude: <input id="aLat" type="text" name="aLat" value="${coord_ar.lattitude}">
 				</div>
 
 				<div id="porte" class="porte">
-					<span>Portée:</span>
+					<span class="bold white">Portée</span>
 					Portée: <input type="text" name="portee" value="${mission.portee}">
 				</div>
 				
 			</div>
 
 			<div class="param">
-				<span>Paramètre</span>
+				<span class="bold white">Paramètre</span>
 					Période: <input type="text" name="periode" value="${mission.periode}">
 
 					Densité du Maillage: <input type="text" name="densite" value="${mission.densite}">
