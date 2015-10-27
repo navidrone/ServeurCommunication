@@ -10,33 +10,98 @@
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 		
 		<link rel="stylesheet" href="resources/css/style.css">
+		
+		<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 		<!-- Inclusion de l'API Google MAPS -->
 		<!-- Le paramètre "sensor" indique si cette application utilise détecteur pour déterminer la position de l'utilisateur -->
 		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 		<script type="text/javascript">
-			function initialiser() {
-										
-				var x = document.getElementById("parcours");
-				var latlng = new google.maps.LatLng(43.5694545840826, 1.4707356691360474);
-				//objet contenant des propriétés avec des identificateurs prédéfinis dans Google Maps permettant
-				//de définir des options d'affichage de notre carte
+		
+		function initialiser() {
+				var latlng = new google.maps.LatLng($('#trlat1').text(),$('#trlon1').text());
+				
 				var options = {
 					center: latlng,
-					zoom: 15,
+					zoom: 19,
 					mapTypeId: google.maps.MapTypeId.ROADMAP
 				};
 				
-				//constructeur de la carte qui prend en paramêtre le conteneur HTML
-				//dans lequel la carte doit s'afficher et les options
 				var carte = new google.maps.Map(document.getElementById("carte"), options);
 				
-				// Récupération des coordonnées GPS
+				/****************Nouveau code****************/
 				
-				var parcoursBus = new Array();
-				for(var i= 0; i < x.length; i+2)
-				{
-					parcoursBus.push(new google.maps.LatLng(x[i], x[i+1]));
+				
+				
+				var type = $("#type").text()
+				
+				var zoom = 15;
+				
+				if(type==="toc"){
+					
+					var zoom = 30;
 				}
+
+				//redéfinition du centre de la carte
+				carte.setCenter(new google.maps.LatLng($('#trlat1').text(),$('#trlon1').text()));
+				//redéfinition du zoom
+				carte.setZoom(zoom);
+				
+				
+			 var nbtr  = $("tr").length;
+				
+				var parcoursBus=[];
+			    
+				for(var iter= 1; iter < nbtr; iter++){
+					
+					parcoursBus.push(new google.maps.LatLng($('#trlat'+iter).text(),$('#trlon'+iter).text()));
+					
+					//var Profondeur= $('#trlat'+iter).text();
+					
+					var Profondeur= $('#trpro'+iter).text();
+					
+					if( Profondeur === ''){
+					
+						var title = "Il n'y a pas de relevé sur ce point ";
+		
+				}else{
+					
+					var title = "La profondeur: "+Profondeur
+					
+				}
+					
+					//création du marqueur
+				  var markerx = 'marqueur'+iter ;
+					var markerx = new google.maps.Marker({
+						position: new google.maps.LatLng($('#trlat'+iter).text(), $('#trlon'+iter).text()),
+						title: title,
+						map: carte,
+						
+					});
+					
+					google.maps.event.addListener(markerx, 'click', function() {
+						
+						var num = markerx.getTitle();
+						
+						alert(num);
+						
+						
+						var Profondeur= $('#trpro'+iter).text();
+						
+						if( Profondeur = ' '){
+						
+						alert("Il n'y a pas de relevé sur ce point ");//message d'alerte
+					}else{
+						
+						alert("La profondeur: "+Profondeur);
+					}
+						
+					});
+
+				} 
+				
+				
+				
+				
 				
 				var traceParcoursBus = new google.maps.Polyline({
 					path: parcoursBus,//chemin du tracé
@@ -48,6 +113,8 @@
 				//lier le tracé à la carte
 				//ceci permet au tracé d'être affiché sur la carte
 				traceParcoursBus.setMap(carte);
+
+				/********************************************/
 			}
 		</script>
 	</head>
@@ -69,7 +136,8 @@
 	</div>
 	<div class ="containe">
 		<div class="title">
-				Titre:   ${mission.name}
+				Titre:   ${mission.name}  
+				<br>Type: <div id="type">${mission.type}</div>
 			</div>
 		
 			
@@ -77,7 +145,7 @@
 			<div class="slide-bar-right">
 				<table class="table">
 					<tr>
-						<th class="th">N</th>
+						<th id= class="th">N</th>
 						<th class="th">Latitude</th>
 						<th class="th">Longitude</th>
 						<th class="th">Profondeur</th>
@@ -91,10 +159,10 @@
 					<c:forEach var="releve" items="${releves}">
 
 					<tr>
-						<td class="td">${i}</td>
-						<td class="td">${releve.getCoordGps().lattitude}</td>
-						<td class="td">${releve.getCoordGps().longitude}</td>
-						<td class="td">${releve.getProfondeur()}</td>
+						<td  class="td">${i}</td>
+						<td id="trlat${i}" class="td">${releve.getCoordGps().lattitude}</td>
+						<td id="trlon${i}" class="td">${releve.getCoordGps().longitude}</td>
+						<td id="trpro${i}" class="td">${releve.getProfondeur()}</td>
 						<td class="td">${releve.getDateReleve()}</td>
 					</tr>
 					<c:set var="i" value="${i + 1}" scope="page"/>
