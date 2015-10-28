@@ -70,7 +70,13 @@
 				}
 					
 					//création du marqueur
-				  
+				  var markerx = 'marqueur'+iter ;
+					var markerx = new google.maps.Marker({
+						position: new google.maps.LatLng($('#trlat'+iter).text(), $('#trlon'+iter).text()),
+						title: title,
+						map: carte,
+						
+					});
 					
 					google.maps.event.addListener(markerx, 'click', function() {
 						
