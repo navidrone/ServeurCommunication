@@ -140,7 +140,8 @@
 				<span class="bold white">Paramètres</span>
 					Période: <input type="text" name="periode">
 					Densité du Maillage: <input type="text" name="densite">
-					
+					<br>
+					<br>
 					<label for="listeDrone">Nom des drones, séparés par une virgule :</label>
         		<textarea id="listeDrone" name="listeDrone" rows="1" cols="40" tabindex="40" 
  				></textarea>

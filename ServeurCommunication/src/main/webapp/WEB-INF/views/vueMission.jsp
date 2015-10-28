@@ -70,13 +70,7 @@
 				}
 					
 					//création du marqueur
-				  var markerx = 'marqueur'+iter ;
-					var markerx = new google.maps.Marker({
-						position: new google.maps.LatLng($('#trlat'+iter).text(), $('#trlon'+iter).text()),
-						title: title,
-						map: carte,
-						
-					});
+				  
 					
 					google.maps.event.addListener(markerx, 'click', function() {
 						
@@ -125,9 +119,9 @@
 
 <div class="containP">
 	<div class="slide-bar">
-		<div class= "nav">
+		<div id="cssmenu">
 		 <ul>
-		 	<li> <a href="accueil">Accueil</a></li>
+		 	<li class="active"> <a href="accueil">Accueil</a></li>
 		 	<li><a href="creer"> Créer mission</a></li>
 		 	<li><a href="missions"> Liste missions</a>  </li>
 		 </ul>
@@ -141,7 +135,7 @@
 			</div>
 		
 			
-	<div id="carte" class="maps-resultat"  style="width:60%; height:80% ; float: left;"></div>
+	<div id="carte" class="maps-resultat"  style="width:98%; height:50% ; float: left;"></div>
 			<div class="slide-bar-right">
 				<table class="table">
 					<tr>

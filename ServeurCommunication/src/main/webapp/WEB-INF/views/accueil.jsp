@@ -27,10 +27,8 @@
 	
 	<div class ="containe" >
 		<h1 class="titreRecherche">${titrePage}</h1>	
-		<br>	
-			
-				
-		<img alt="importer" src="resources/images/midi.png">
+					
+		<img alt="importer" src="resources/images/midi.jpg" style="width:100%">
 		<br>
 		
 						
